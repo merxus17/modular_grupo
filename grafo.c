@@ -85,7 +85,7 @@ Obs.: nada é auto explicativo quando se quer um 10*/
 
 
 
-    grafo_tpCondRet InsereGrafo(void* pGrafo, int valor , char orig[][],char dest[])
+    grafo_tpCondRet InsereGrafo(void* pGrafo, int valor , char orig[][150],char dest[][150])
     {
       LIS_tpCondRet ret;
       ret=LIS_InserirElementoApos(*pGrafo->ponteirosHead , &valor);
