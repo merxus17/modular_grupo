@@ -118,7 +118,19 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
       {
         p=LIS_ObterValor(Ant);
         x=LIS_ProcurarValor(grafo->ponteirosHead , void * p) ;
-        
+        //atualizar as listas aki
+        x=LIS_AvancarElementoCorrente( Ant , 1 ) ;
+
       }
+      IrInicioLista( Suc ) ;
+      while(x!=2)
+      {
+        p=LIS_ObterValor(Suc);
+        x=LIS_ProcurarValor(grafo->ponteirosHead , void * p) ;
+        //atualizar as listas aki
+        x=LIS_AvancarElementoCorrente( Suc , 1 ) ;
+
+      }
+
 
     }
