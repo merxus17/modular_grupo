@@ -37,7 +37,7 @@
       LIS_tppLista* ponteirosHead;
 			/*que aponta para os vertices de forma similar a uma lista de adjacencias*/
 
-      Vertice* ponteirosVertices;
+    //  Vertice* ponteirosVertices;
 			/*aguarda as estruturas dos vertices , estou considerando usar apenas um vetor ja que ponteirosHead já aponta pro Vertices*/
 
       Vertice* No_Corrente;
@@ -87,7 +87,7 @@ Obs.: nada é auto explicativo quando se quer um 10*/
 /*A função recebe o grafo no qual vai inserir , o nome do Vertice a ser inserido
 e as listas de vertices succesores e antecessores.Cria o vertice dinamicamente e insere ele no grafo , depois disso
 cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
-    grafo_tpCondRet Insere_No_Grafo(void* pGrafo,char nome[150], LIS_tppLista ListaAnt,LIS_tppLista ListaSuc)
+    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], LIS_tppLista ListaAnt,LIS_tppLista ListaSuc)
     {
       int i,j;
       LIS_tpCondRet retVertice,retAnt,retSuc;
@@ -96,22 +96,29 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
       novo.Valor=NULL;
       novo->Lista_Antecessores=LIS_CriarLista(NULL);
       novo->Lista_Sucessores=LIS_CriarLista(NULL);
-      retVertice=LIS_InserirElementoApos(*pGrafo->ponteirosHead , &novo);
+      retVertice=LIS_InserirElementoApos(pGrafo->ponteirosHead , &novo);
       if(ret!=LIS_CondRetOK)
       {
         return Grafo_CondRetDeuMerda;/*isso é TEMPORARIO*/
       }
       novo->Lista_Antecessores=ListaAnt;
       novo->Lista_Sucessores=ListaSuc;
-      Completa_Arestas(novo,ListaAnt,ListaSuc);
+      Completa_Arestas(pGrafo,novo,ListaAnt,ListaSuc);
 
       return Grafo_CondRetOK;
     }
 
 
-    void Completa_Arestas (Vertice* no, LIS_tppLista Ant ,LIS_tppLista Suc)
+    void Completa_Arestas ( Grafo* grafo ,Vertice* no, LIS_tppLista Ant ,LIS_tppLista Suc)
     {
-      for(gg)
-
+      LIS_tpCondRet x=0;
+      Vertice* p;
+      IrInicioLista( Ant ) ;
+      while(x!=2)
+      {
+        p=LIS_ObterValor(Ant);
+        x=LIS_ProcurarValor(grafo->ponteirosHead , void * p) ;
+        
+      }
 
     }
