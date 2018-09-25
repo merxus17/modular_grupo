@@ -24,10 +24,10 @@
 
  /* Tipo referência para um vértice do grafo */
 
- typedef struct Vertices;
+ typedef struct Vertice *str_vertice;
 
  /* Tipo referência para um grafo */
- typedef struct Grafo;
+ typedef struct Grafo *str_grafo;
 
 
  /***********************************************************************
