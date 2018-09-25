@@ -89,6 +89,7 @@ e as listas de vertices succesores e antecessores.Cria o vertice dinamicamente e
 cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
     grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], LIS_tppLista ListaAnt,LIS_tppLista ListaSuc)
     {
+
       int i,j;
       LIS_tpCondRet retVertice,retAnt,retSuc;
       Vertice* novo =(Vertice*)malloc(sizeof(Vertice))
@@ -97,7 +98,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
       novo->Lista_Antecessores=LIS_CriarLista(NULL);
       novo->Lista_Sucessores=LIS_CriarLista(NULL);
       retVertice=LIS_InserirElementoApos(pGrafo->ponteirosHead , &novo);
-      if(ret!=LIS_CondRetOK)
+      if(retVertice!=LIS_CondRetOK)
       {
         return Grafo_CondRetDeuMerda;/*isso é TEMPORARIO*/
       }
