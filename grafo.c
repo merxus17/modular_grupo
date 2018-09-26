@@ -91,12 +91,15 @@ Obs.: nada é auto explicativo quando se quer um 10*/
     {
       LIS_tpCondRet x=LIS_CondRetOK;
       void* p;
+	  Vertice* v;
       IrInicioLista( Ant ) ;
       while(x!=2)
       {
         p=LIS_ObterValor(Ant);
         x=LIS_ProcurarValor(grafo->ponteirosHead , p) ;
         //atualizar as listas aki
+		v=LIS_ObterValor(grafo->ponteirosHead);
+		x=LIS_InserirElementoApos( v->Lista_Sucessores, no);
         x=LIS_AvancarElementoCorrente( Ant , 1 ) ;
 
       }
@@ -106,6 +109,8 @@ Obs.: nada é auto explicativo quando se quer um 10*/
         p=LIS_ObterValor(Suc);
         x=LIS_ProcurarValor(grafo->ponteirosHead , p) ;
         //atualizar as listas aki
+		v = LIS_ObterValor(grafo->ponteirosHead);
+		x = LIS_InserirElementoApos(v->Lista_Antecessores, no);
         x=LIS_AvancarElementoCorrente( Suc , 1 ) ;
 
       }
