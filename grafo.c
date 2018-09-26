@@ -13,6 +13,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data         Observações
+	  5       Rodrigo  26/07/2018   Termino da implementação da inserção e implementação da função obter
 *     4       Rodrigo  21/set/2018  Implementação da função de inserção
       3       Evelyn   19/set/2018  Testes da função de criação
       2       Rodrigo  18/set/2018  início desenvolvimento , implementação da função de criação
