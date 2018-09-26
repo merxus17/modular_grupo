@@ -85,7 +85,7 @@ Obs.: nada é auto explicativo quando se quer um 10*/
       pGrafo=ponteiroGrafo;
       return Grafo_CondRetOK;
     }
-
+	  /* Retorna aos nós ja inseridos e atualiza suas listas de antessesor e sucessor */
 	 
     void Completa_Arestas ( Grafo* grafo ,Vertice* no, LIS_tppLista Ant ,LIS_tppLista Suc)
     {
@@ -140,11 +140,36 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
       novo->Lista_Antecessores=ListaAnt;
       novo->Lista_Sucessores=ListaSuc;
       Completa_Arestas(pGrafo,novo,ListaAnt,ListaSuc);
-
+	  pGrafo->No_Corrente = novo;
       return Grafo_CondRetOK;
     }
+	/* Obtem o nome do nó Corrente
+	  pgrafo- ponteiro para o grafo
+	  Valor - ponteiro que recebe o valor 
+	
+	*/
+	grafo_tpCondRet ObterValor(Grafo* pGrafo, int* Valor)
+	{
+		if(pGrafo->No_Corrente)
+		{
+			return Grafo_CondRetNãoAchou;
+		}
+		Valor = pGrafo->No_Corrente->Valor;
+		return Grafo_CondRetOK;
+	}
+
+
+
+
+
+
+
+
+
+
 
 	void main(void)
 	{
 		return;
 	}
+	
