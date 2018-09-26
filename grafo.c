@@ -25,26 +25,7 @@
   #include   <malloc.h>
   #include   <assert.h>
   #include	 "grafo.h"
-
-/***************************************************
-*
-* $TC Tipo de dado: Estrutura do grafo
-*
-*
-****************************************************/
-  typedef struct Grafo
-    {
-      LIS_tppLista* ponteirosHead;
-			/*que aponta para os vertices de forma similar a uma lista de adjacencias*/
-
-    //  Vertice* ponteirosVertices;
-			/*aguarda as estruturas dos vertices , estou considerando usar apenas um vetor ja que ponteirosHead já aponta pro Vertices*/
-
-      Vertice* No_Corrente;
-			 /*No_Corrente aponta para no corrente */
-
-    }Grafo;
-
+  
 
   /* Acredito ser auto explicativo
 Obs.: nada é auto explicativo quando se quer um 10*/
@@ -60,10 +41,32 @@ Obs.: nada é auto explicativo quando se quer um 10*/
     typedef struct Vertice
     {
       int Valor;
-      LIS_tppLista* Lista_Antecessores;
-      LIS_tppLista* Lista_Sucessores;
-      char Nome [150];
+      LIS_tppLista Lista_Antecessores;
+      LIS_tppLista Lista_Sucessores;
+      char *Nome ;
     }Vertice;
+
+/***************************************************
+*
+* $TC Tipo de dado: Estrutura do grafo
+*
+*
+****************************************************/
+  typedef struct Grafo
+    {
+      LIS_tppLista ponteirosHead;
+			/*que aponta para os vertices de forma similar a uma lista de adjacencias*/
+
+    //  Vertice* ponteirosVertices;
+			/*aguarda as estruturas dos vertices , estou considerando usar apenas um vetor ja que ponteirosHead já aponta pro Vertices*/
+
+      Vertice* No_Corrente;
+			 /*No_Corrente aponta para no corrente */
+
+    }Grafo;
+
+
+
 
 /*Cria o grafo alocando a lista de ponteiros para os vertices e a propria lista de vertices e o no corrente como null */
 
@@ -76,11 +79,38 @@ Obs.: nada é auto explicativo quando se quer um 10*/
         return Grafo_CondRetFaltouMemoria;
       }
 
-      ponteiroGrafo->ponteirosHead=LIS_CriarLista(Função de excluir valor);
-      ponteiroGrafo->ponteirosVertices=NULL;
+      ponteiroGrafo->ponteirosHead=LIS_CriarLista(NULL);
+     // ponteiroGrafo->ponteirosVertices=NULL;
       ponteiroGrafo->No_Corrente=NULL;
       pGrafo=ponteiroGrafo;
       return Grafo_CondRetOK;
+    }
+
+	 
+    void Completa_Arestas ( Grafo* grafo ,Vertice* no, LIS_tppLista Ant ,LIS_tppLista Suc)
+    {
+      LIS_tpCondRet x=LIS_CondRetOK;
+      void* p;
+      IrInicioLista( Ant ) ;
+      while(x!=2)
+      {
+        p=LIS_ObterValor(Ant);
+        x=LIS_ProcurarValor(grafo->ponteirosHead , p) ;
+        //atualizar as listas aki
+        x=LIS_AvancarElementoCorrente( Ant , 1 ) ;
+
+      }
+      IrInicioLista( Suc ) ;
+      while(x!=2)
+      {
+        p=LIS_ObterValor(Suc);
+        x=LIS_ProcurarValor(grafo->ponteirosHead , p) ;
+        //atualizar as listas aki
+        x=LIS_AvancarElementoCorrente( Suc , 1 ) ;
+
+      }
+
+	  return;
     }
 
 
@@ -90,11 +120,11 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
     grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], LIS_tppLista ListaAnt,LIS_tppLista ListaSuc)
     {
 
-      int i,j;
-      LIS_tpCondRet retVertice,retAnt,retSuc;
-      Vertice* novo =(Vertice*)malloc(sizeof(Vertice))
-      novo->Nome=nome;
-      novo.Valor=NULL;
+      
+      LIS_tpCondRet retVertice;
+      Vertice* novo =(Vertice*)malloc(sizeof(Vertice));
+	  novo->Nome=nome;
+      novo->Valor=0;
       novo->Lista_Antecessores=LIS_CriarLista(NULL);
       novo->Lista_Sucessores=LIS_CriarLista(NULL);
       retVertice=LIS_InserirElementoApos(pGrafo->ponteirosHead , &novo);
@@ -109,29 +139,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
       return Grafo_CondRetOK;
     }
 
-
-    void Completa_Arestas ( Grafo* grafo ,Vertice* no, LIS_tppLista Ant ,LIS_tppLista Suc)
-    {
-      LIS_tpCondRet x=0;
-      Vertice* p;
-      IrInicioLista( Ant ) ;
-      while(x!=2)
-      {
-        p=LIS_ObterValor(Ant);
-        x=LIS_ProcurarValor(grafo->ponteirosHead , void * p) ;
-        //atualizar as listas aki
-        x=LIS_AvancarElementoCorrente( Ant , 1 ) ;
-
-      }
-      IrInicioLista( Suc ) ;
-      while(x!=2)
-      {
-        p=LIS_ObterValor(Suc);
-        x=LIS_ProcurarValor(grafo->ponteirosHead , void * p) ;
-        //atualizar as listas aki
-        x=LIS_AvancarElementoCorrente( Suc , 1 ) ;
-
-      }
-
-
-    }
+	void main(void)
+	{
+		return;
+	}

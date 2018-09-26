@@ -19,7 +19,7 @@
 
 
 
-#include "LISTA.H"
+	#include "LISTA.H"
 
 
  /* Tipo referência para um vértice do grafo */
@@ -47,8 +47,9 @@ typedef enum {
          Grafo_CondRetNaoAchou ,
                /* Não encontrou o valor procurado */
 
-         Grafo_CondRetFaltouMemoria
+         Grafo_CondRetFaltouMemoria,
                /* Faltou memória ao tentar criar (...)*/
+		 Grafo_CondRetDeuMerda
 
    } grafo_tpCondRet ;
 
