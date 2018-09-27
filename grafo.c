@@ -26,6 +26,7 @@
   #include   <malloc.h>
   #include   <assert.h>
   #include	 "grafo.h"
+  #include   "Vertice.h"
   
 
   /* Acredito ser auto explicativo
@@ -123,16 +124,12 @@ Obs.: nada é auto explicativo quando se quer um 10*/
 /*A função recebe o grafo no qual vai inserir , o nome do Vertice a ser inserido
 e as listas de vertices succesores e antecessores.Cria o vertice dinamicamente e insere ele no grafo , depois disso
 cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
-    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], LIS_tppLista ListaAnt,LIS_tppLista ListaSuc)
+    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], LIS_tppLista ListaAnt,LIS_tppLista ListaSuc, int Valor)
     {
 
       
       LIS_tpCondRet retVertice;
-      Vertice* novo =(Vertice*)malloc(sizeof(Vertice));
-	  novo->Nome=nome;
-      novo->Valor=0;
-      novo->Lista_Antecessores=LIS_CriarLista(NULL);
-      novo->Lista_Sucessores=LIS_CriarLista(NULL);
+	  Vertice* novo = Cria_Vertice( nome,  Valor);
       retVertice=LIS_InserirElementoApos(pGrafo->ponteirosHead , &novo);
       if(retVertice!=LIS_CondRetOK)
       {
@@ -153,9 +150,9 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	{
 		if(pGrafo->No_Corrente)
 		{
-			return Grafo_CondRetNãoAchou;
+			return Grafo_CondRetNotFound;
 		}
-		Valor = pGrafo->No_Corrente->Valor;
+		*Valor = pGrafo->No_Corrente->Valor;
 		return Grafo_CondRetOK;
 	}
 

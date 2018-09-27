@@ -51,7 +51,7 @@ typedef enum {
                /* Faltou mem�ria ao tentar criar (...)*/
 		 		 Grafo_CondRetDeuMerda,
 
-		 	 	 Grafo_CondRetNãoAchou
+		 	 	 Grafo_CondRetNotFound
 
    } grafo_tpCondRet ;
 
