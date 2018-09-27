@@ -13,7 +13,9 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data         Observações
-	  5       Rodrigo  26/07/2018   Termino da implementação da inserção e implementação da função obter
+	  7		  Rodrigo  27/09/2018   Criando as funções de navegação manual 
+      6		  Rodrigo  27/09/2018	Criando as funções obtervalor e procurar , estudando navegação "manual" do grafo 
+	  5       Rodrigo  26/07/2018   Termino da implementação da inserção e implementação da função obtervalorcorrente
 *     4       Rodrigo  21/set/2018  Implementação da função de inserção
       3       Evelyn   19/set/2018  Testes da função de criação
       2       Rodrigo  18/set/2018  início desenvolvimento , implementação da função de criação
@@ -33,20 +35,9 @@
 Obs.: nada é auto explicativo quando se quer um 10*/
 
 
-  /***************************************************
-  *
-  * $TC Tipo de dado:	Elemento do Grafo
-  *
-  *
-  ****************************************************/
+typedef struct Vertice Vertice;
 
-    typedef struct Vertice
-    {
-      int Valor;
-      LIS_tppLista Lista_Antecessores;
-      LIS_tppLista Lista_Sucessores;
-      char *Nome ;
-    }Vertice;
+   
 
 /***************************************************
 *
@@ -71,7 +62,6 @@ Obs.: nada é auto explicativo quando se quer um 10*/
 
 
 /*Cria o grafo alocando a lista de ponteiros para os vertices e a propria lista de vertices e o no corrente como null */
-
      grafo_tpCondRet CriaGrafo(void* pGrafo)
     {
       Grafo* ponteiroGrafo;
@@ -87,13 +77,15 @@ Obs.: nada é auto explicativo quando se quer um 10*/
       pGrafo=ponteiroGrafo;
       return Grafo_CondRetOK;
     }
-	  /* Retorna aos nós ja inseridos e atualiza suas listas de antessesor e sucessor */
 	 
-    void Completa_Arestas ( Grafo* grafo ,Vertice* no, LIS_tppLista Ant ,LIS_tppLista Suc)
+
+
+	 /* Retorna aos nós ja inseridos e atualiza suas listas de antessesor e sucessor */
+    void Completa_Arestas ( Grafo* grafo ,vertice* no, LIS_tppLista Ant ,LIS_tppLista Suc)
     {
       LIS_tpCondRet x=LIS_CondRetOK;
       void* p;
-	  Vertice* v;
+	  vertice* v;
       IrInicioLista( Ant ) ;
       while(x!=2)
       {
@@ -101,7 +93,7 @@ Obs.: nada é auto explicativo quando se quer um 10*/
         x=LIS_ProcurarValor(grafo->ponteirosHead , p) ;
         //atualizar as listas aki
 		v=LIS_ObterValor(grafo->ponteirosHead);
-		x=LIS_InserirElementoApos( v->Lista_Sucessores, no);
+		x=LIS_InserirElementoApos( getLIS_SUC(v), no);
         x=LIS_AvancarElementoCorrente( Ant , 1 ) ;
 
       }
@@ -112,7 +104,7 @@ Obs.: nada é auto explicativo quando se quer um 10*/
         x=LIS_ProcurarValor(grafo->ponteirosHead , p) ;
         //atualizar as listas aki
 		v = LIS_ObterValor(grafo->ponteirosHead);
-		x = LIS_InserirElementoApos(v->Lista_Antecessores, no);
+		x = LIS_InserirElementoApos(getLIS_Ant(v), no);
         x=LIS_AvancarElementoCorrente( Suc , 1 ) ;
 
       }
@@ -135,27 +127,96 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
       {
         return Grafo_CondRetDeuMerda;/*isso é TEMPORARIO*/
       }
-      novo->Lista_Antecessores=ListaAnt;
-      novo->Lista_Sucessores=ListaSuc;
       Completa_Arestas(pGrafo,novo,ListaAnt,ListaSuc);
 	  pGrafo->No_Corrente = novo;
       return Grafo_CondRetOK;
     }
+	
+	
+
 	/* Obtem o nome do nó Corrente
 	  pgrafo- ponteiro para o grafo
-	  Valor - ponteiro que recebe o valor 
-	
-	*/
-	grafo_tpCondRet ObterValor(Grafo* pGrafo, int* Valor)
+	  Valor - ponteiro que recebe o valor */
+	grafo_tpCondRet ObterValorCorrente(Grafo* pGrafo, int* Valor)
 	{
 		if(pGrafo->No_Corrente)
 		{
 			return Grafo_CondRetNotFound;
 		}
-		*Valor = pGrafo->No_Corrente->Valor;
+		*Valor = getValor(pGrafo->No_Corrente);
 		return Grafo_CondRetOK;
 	}
 
+
+
+	/*Trecho em Obra  ,Desculpe o transtorno   */
+	void Procura_No(Grafo* pGrafo, char* nome)
+	{
+		//SeiLÀ	dfs
+		IrInicioLista(pGrafo->ponteirosHead);
+		LIS_tppLista visitados = LIS_CriarLista(NULL);
+		while (strcmp(getNome(pGrafo->ponteirosHead) ,nome)!=0)
+		{ 
+			LIS_AvancarElementoCorrente(pGrafo->ponteirosHead, 1);			
+		}
+			
+			/*for each w adjacent to i
+				if (!visited[w])
+					DFS(w);*/
+
+		
+	
+	}
+
+
+
+	/*Acha o valor em qualquer no do grafo 
+		pgrafo- ponteiro para o grafo
+		nome - nome do nó
+		Valor - ponteiro que recebe o valor 
+		*/
+	grafo_tpCondRet ObterValor(Grafo* pGrafo, char* nome, int* Valor)
+	{
+		grafo_tpCondRet x;
+		Procura_No(pGrafo, nome);
+		x = ObterValorCorrente(pGrafo, Valor);
+		return Grafo_CondRetOK;
+	}
+
+
+
+	/*Torna o primeiro Vertice o no corrente*/
+	grafo_tpCondRet IrInicioGrafo(Grafo* pGrafo)
+	{
+		IrInicioLista(pGrafo->ponteirosHead);
+		return Grafo_CondRetOK;
+	}
+
+
+	/*Torna o primeiro Vertice o no corrente*/
+	grafo_tpCondRet IrFinalGrafo(Grafo* pGrafo)
+	{
+		IrFinalLista(pGrafo->ponteirosHead);
+		return Grafo_CondRetOK;
+	
+	
+	}
+	
+
+	/* Eduardo e evelyn ver a função  LIS_AvancarElementoCorrente funciona igualzinho*/
+	grafo_tpCondRet Avanca_Corrente(Grafo* pGrafo, int n)
+	{
+		LIS_tpCondRet x;
+		x = LIS_AvancarElementoCorrente(pGrafo->ponteirosHead, n);
+		if (x == LIS_CondRetFimLista)
+		{
+			return Grafo_CondRetFimDoGrafo;
+		}
+
+		return Grafo_CondRetOK;
+	}
+
+	
 
 
 

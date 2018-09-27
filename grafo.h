@@ -24,10 +24,10 @@
 
  /* Tipo refer�ncia para um v�rtice do grafo */
 
- typedef struct Vertice *str_vertice;
+ typedef struct Vertice Vertice;
 
  /* Tipo refer�ncia para um grafo */
- typedef struct Grafo *str_grafo;
+ typedef struct Grafo Grafo;
 
 
  /***********************************************************************
@@ -51,7 +51,9 @@ typedef enum {
                /* Faltou mem�ria ao tentar criar (...)*/
 		 		 Grafo_CondRetDeuMerda,
 
-		 	 	 Grafo_CondRetNotFound
+		 	 	 Grafo_CondRetNotFound,
+					
+				 Grafo_CondRetFimDoGrafo
 
    } grafo_tpCondRet ;
 
@@ -70,4 +72,10 @@ typedef enum {
 *
 *
 ***********************************************************************/
-    grafo_tpCondRet CriaGrafo(void* pGrafo);
+    grafo_tpCondRet CriaGrafo(void *pGrafo);
+	grafo_tpCondRet Insere_No_Grafo(Grafo *pGrafo, char nome[150], LIS_tppLista ListaAnt, LIS_tppLista ListaSuc, int Valor);
+	grafo_tpCondRet ObterValor(Grafo  *pGrafo, char *nome, int *Valor);
+	grafo_tpCondRet ObterValorCorrente(Grafo *pGrafo, int *Valor);
+	grafo_tpCondRet IrInicioGrafo(Grafo *pGrafo);
+	grafo_tpCondRet IrFinalGrafo(Grafo *pGrafo);
+	grafo_tpCondRet Avanca_Corrente(Grafo *pGrafo, int n);

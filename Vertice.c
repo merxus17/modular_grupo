@@ -6,7 +6,12 @@
 
 #include "Vertice.h"
 
-
+/***************************************************
+*
+* $TC Tipo de dado:	Elemento do Grafo
+*
+*
+****************************************************/
 typedef struct Vertice
 {
 	int Valor;
@@ -30,4 +35,26 @@ vertice* Cria_Vertice(char* nome, int Valor)
 void Destroi_Vertice(vertice* v)
 {
 	free(v);
+}
+
+
+
+char* getNome(vertice* v)
+{
+	return v->Nome;
+}
+
+int getValor(vertice* v)
+{
+	return v->Valor;
+}
+
+LIS_tppLista getLIS_SUC(vertice*v)
+{
+	return v->Lista_Sucessores;
+}
+
+LIS_tppLista getLIS_Ant(vertice*v)
+{
+	return v->Lista_Antecessores;
 }
