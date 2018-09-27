@@ -73,9 +73,30 @@ typedef enum {
 *
 ***********************************************************************/
     grafo_tpCondRet CriaGrafo(void *pGrafo);
+	/*
+		Insere o nó no grafo  e acertar as ligações direcionadas
+		pGrafo- ponteiro pro Grafo 
+		nome- rotulo do no 
+		ListAnt- Lista de Antecessores
+		ListSuc-Lista de Sucessores
+		Valor-Valor arbitrario atribuido ao no 
+
+	*/
 	grafo_tpCondRet Insere_No_Grafo(Grafo *pGrafo, char nome[150], LIS_tppLista ListaAnt, LIS_tppLista ListaSuc, int Valor);
+
+	/*Acha o Valor de um no através de um nome 
+		pGrafo- ponteiro pro Grafo 
+		nome- rotulo do no 
+		Valor- o valor a ser retornado 
+	*/
 	grafo_tpCondRet ObterValor(Grafo  *pGrafo, char *nome, int *Valor);
+	/*
+	 Obtem o valor do no corrente 
+	*/
 	grafo_tpCondRet ObterValorCorrente(Grafo *pGrafo, int *Valor);
+	/* Obtem o primeiro no inserido no grafo */
 	grafo_tpCondRet IrInicioGrafo(Grafo *pGrafo);
+	/*Obtem o ultimo no inserido no grafo */
 	grafo_tpCondRet IrFinalGrafo(Grafo *pGrafo);
+	/*Avança o no corrente para frente ou pra tras baseado no n */
 	grafo_tpCondRet Avanca_Corrente(Grafo *pGrafo, int n);
