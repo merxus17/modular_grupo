@@ -6,7 +6,7 @@
 
 typedef struct Vertice vertice;
 
-vertice* Cria_Vertice(char *nome, int Valor);
+vertice* Cria_Vertice(char *nome, int Valor, LIS_tppLista ListaAnt,  LIS_tppLista ListaSuc);
 
 
 
