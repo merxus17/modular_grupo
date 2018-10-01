@@ -62,19 +62,18 @@ typedef struct Vertice Vertice;
 
 
 /*Cria o grafo alocando a lista de ponteiros para os vertices e a propria lista de vertices e o no corrente como null */
-     grafo_tpCondRet CriaGrafo(void* pGrafo)
+     grafo_tpCondRet CriaGrafo(Grafo* pGrafo)
     {
-      Grafo* ponteiroGrafo;
-      ponteiroGrafo=(Grafo*)malloc(sizeof(Grafo));
-      if(ponteiroGrafo==NULL)
+      printf("%p\n",pGrafo);
+      pGrafo=(Grafo*)malloc(sizeof(Grafo));
+      if(pGrafo==NULL)
       {
         return Grafo_CondRetFaltouMemoria;
       }
-
-      ponteiroGrafo->ponteirosHead=LIS_CriarLista(NULL);
+	  printf("%p\n",pGrafo);
+      pGrafo->ponteirosHead=LIS_CriarLista(NULL);
      // ponteiroGrafo->ponteirosVertices=NULL;
-      ponteiroGrafo->No_Corrente=NULL;
-      pGrafo=ponteiroGrafo;
+      pGrafo->No_Corrente=NULL;
       return Grafo_CondRetOK;
     }
 	 
@@ -116,20 +115,20 @@ typedef struct Vertice Vertice;
 /*A função recebe o grafo no qual vai inserir , o nome do Vertice a ser inserido
 e as listas de vertices succesores e antecessores.Cria o vertice dinamicamente e insere ele no grafo , depois disso
 cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
-    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], char ant[],char suc[], int Valor)
+    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], char ant[][15],char suc[][15], int Valor)
     {
 	  int i;
 	   Vertice* novo;
 	  LIS_tpCondRet retVertice;
       LIS_tppLista ListaSuc=LIS_CriarLista(NULL);
       LIS_tppLista ListaAnt=LIS_CriarLista(NULL);
-	  for(i=0;ant[i]!=NULL;i++)
+	  for(i=0;i<3;i++)
 	  {
 		LIS_InserirElementoApos( ListaAnt, &ant[i]);
-	  
+	    
 	  }
 
-	  for(i=0;suc[i]!=NULL;i++)
+	  for(i=0;i<2;i++)
 	  {
 		LIS_InserirElementoApos( ListaAnt, &suc[i]);
 	  
@@ -137,7 +136,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
       
 	  novo = Cria_Vertice( nome,  Valor, ListaAnt , ListaSuc);
 	  
-      retVertice=LIS_InserirElementoApos(pGrafo->ponteirosHead , &novo);
+      retVertice=LIS_InserirElementoApos(pGrafo->ponteirosHead , novo);
       if(retVertice!=LIS_CondRetOK)
       {
         return Grafo_CondRetDeuMerda;/*isso é TEMPORARIO*/
@@ -241,10 +240,3 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 
 
 
-
-
-	void main(void)
-	{
-		return;
-	}
-	
