@@ -100,3 +100,5 @@ typedef enum {
 	grafo_tpCondRet IrFinalGrafo(Grafo *pGrafo);
 	/*Avança o no corrente para frente ou pra tras baseado no n */
 	grafo_tpCondRet Avanca_Corrente(Grafo *pGrafo, int n);
+	/*Elimina um elemento do grafo */
+	grafo_tpCondRet EliminaNo(Grafo  *pGrafo);
