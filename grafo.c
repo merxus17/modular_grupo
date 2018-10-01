@@ -92,7 +92,7 @@ typedef struct Vertice Vertice;
         p=LIS_ObterValor(Ant);
         x=LIS_ProcurarValor(grafo->ponteirosHead , p) ;
         //atualizar as listas aki
-		v=LIS_ObterValor(grafo->ponteirosHead);
+		v=(vertice*)LIS_ObterValor(grafo->ponteirosHead);
 		x=LIS_InserirElementoApos( getLIS_SUC(v), no);
         x=LIS_AvancarElementoCorrente( Ant , 1 ) ;
 
@@ -103,7 +103,7 @@ typedef struct Vertice Vertice;
         p=LIS_ObterValor(Suc);
         x=LIS_ProcurarValor(grafo->ponteirosHead , p) ;
         //atualizar as listas aki
-		v = LIS_ObterValor(grafo->ponteirosHead);
+		v =(vertice*) LIS_ObterValor(grafo->ponteirosHead);
 		x = LIS_InserirElementoApos(getLIS_Ant(v), no);
         x=LIS_AvancarElementoCorrente( Suc , 1 ) ;
 
@@ -116,12 +116,27 @@ typedef struct Vertice Vertice;
 /*A função recebe o grafo no qual vai inserir , o nome do Vertice a ser inserido
 e as listas de vertices succesores e antecessores.Cria o vertice dinamicamente e insere ele no grafo , depois disso
 cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
-    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], LIS_tppLista ListaAnt,LIS_tppLista ListaSuc, int Valor)
+    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], char ant[],char suc[], int Valor)
     {
+	  int i;
+	   Vertice* novo;
+	  LIS_tpCondRet retVertice;
+      LIS_tppLista ListaSuc=LIS_CriarLista(NULL);
+      LIS_tppLista ListaAnt=LIS_CriarLista(NULL);
+	  for(i=0;ant[i]!=NULL;i++)
+	  {
+		LIS_InserirElementoApos( ListaAnt, &ant[i]);
+	  
+	  }
 
+	  for(i=0;suc[i]!=NULL;i++)
+	  {
+		LIS_InserirElementoApos( ListaAnt, &suc[i]);
+	  
+	  }
       
-      LIS_tpCondRet retVertice;
-	  Vertice* novo = Cria_Vertice( nome,  Valor);
+	  novo = Cria_Vertice( nome,  Valor, ListaAnt , ListaSuc);
+	  
       retVertice=LIS_InserirElementoApos(pGrafo->ponteirosHead , &novo);
       if(retVertice!=LIS_CondRetOK)
       {
@@ -153,9 +168,10 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	void Procura_No(Grafo* pGrafo, char* nome)
 	{
 		//SeiLÀ	dfs
+		LIS_tppLista visitados;
 		IrInicioLista(pGrafo->ponteirosHead);
-		LIS_tppLista visitados = LIS_CriarLista(NULL);
-		while (strcmp(getNome(pGrafo->ponteirosHead) ,nome)!=0)
+		visitados = LIS_CriarLista(NULL);
+		while (strcmp(getNome(pGrafo->No_Corrente) ,nome)!=0)
 		{ 
 			LIS_AvancarElementoCorrente(pGrafo->ponteirosHead, 1);			
 		}

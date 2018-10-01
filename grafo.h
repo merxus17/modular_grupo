@@ -82,7 +82,7 @@ typedef enum {
 		Valor-Valor arbitrario atribuido ao no 
 
 	*/
-	grafo_tpCondRet Insere_No_Grafo(Grafo *pGrafo, char nome[150], LIS_tppLista ListaAnt, LIS_tppLista ListaSuc, int Valor);
+	grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], char ant[],char suc[], int Valor);
 
 	/*Acha o Valor de um no através de um nome 
 		pGrafo- ponteiro pro Grafo 
