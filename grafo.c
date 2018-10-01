@@ -148,7 +148,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	}
 
 
-
+	
 	/*Trecho em Obra  ,Desculpe o transtorno   */
 	void Procura_No(Grafo* pGrafo, char* nome)
 	{
@@ -216,7 +216,34 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		return Grafo_CondRetOK;
 	}
 
-	
+	/* A Função chama a função de eliminar o elemento da lista, tanto na lista de antecessores quanto na de sucessores e depois remove o elemento em sí*/
+	grafo_tpCondRet EliminaNo(Grafo  *pGrafo)
+	{
+		vertice* v;
+		LIS_tppLista Ant=LIS_CriarLista(NULL);
+		LIS_tppLista Suc=LIS_CriarLista(NULL);
+		v=pGrafo->No_Corrente;
+		Suc=getLIS_SUC(v);
+		Ant=getLIS_Ant(v) ;
+		while(LIS_AvancarElementoCorrente(Ant,0)!=LIS_CondRetListaVazia) 
+		{
+			if(LIS_ObterValor(Ant)==v)
+				{
+					LIS_ExcluirElemento(Ant);
+				}
+		}
+		while(LIS_AvancarElementoCorrente(Suc,0)!=LIS_CondRetListaVazia) 
+		{
+			if(LIS_ObterValor(Suc)==v)
+				{
+					LIS_ExcluirElemento(Suc);
+				}
+		}
+		LIS_ExcluirElemento(getLIS_SUC(v)) ;
+		LIS_ExcluirElemento(getLIS_Ant(v)) ;
+		Destroi_Vertice(v);
+		return Grafo_CondRetOK;
+	}
 
 
 
