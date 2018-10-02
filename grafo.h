@@ -72,7 +72,7 @@ typedef enum {
 *
 *
 ***********************************************************************/
-   grafo_tpCondRet CriaGrafo(Grafo* ppGrafo);
+   grafo_tpCondRet CriaGrafo(Grafo** ppGrafo);
 	/*
 		Insere o nó no grafo  e acertar as ligações direcionadas
 		pGrafo- ponteiro pro Grafo 

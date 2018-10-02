@@ -62,11 +62,11 @@ typedef struct Vertice Vertice;
 
 
 /*Cria o grafo alocando a lista de ponteiros para os vertices e a propria lista de vertices e o no corrente como null */
-     grafo_tpCondRet CriaGrafo(Grafo* ppGrafo)
+     grafo_tpCondRet CriaGrafo(Grafo** ppGrafo)
     {
 		
 	  Grafo *pGrafo=(Grafo*)malloc(sizeof(Grafo));
-	  printf("%p %p \n",&ppGrafo,pGrafo);
+	  printf("%p %p \n",&ppGrafo,&pGrafo);
 	  if(pGrafo==NULL)
       {
         return Grafo_CondRetFaltouMemoria;
@@ -76,8 +76,8 @@ typedef struct Vertice Vertice;
      // ponteiroGrafo->ponteirosVertices=NULL;
       pGrafo->No_Corrente=NULL;
 
-	  ppGrafo=pGrafo;
-	  printf("%p %p %p\n",&ppGrafo,ppGrafo,pGrafo);
+	  *ppGrafo=pGrafo;
+	  printf("%p %p %p\n",*ppGrafo,ppGrafo,pGrafo);
       return Grafo_CondRetOK;
     }
 	 
@@ -157,7 +157,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	  Valor - ponteiro que recebe o valor */
 	grafo_tpCondRet ObterValorCorrente(Grafo* pGrafo, int* Valor)
 	{
-		if(pGrafo->No_Corrente)
+		if(pGrafo->No_Corrente==NULL)
 		{
 			return Grafo_CondRetNotFound;
 		}
