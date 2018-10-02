@@ -241,22 +241,38 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		vertice* v;
 		LIS_tppLista Ant=LIS_CriarLista(NULL);
 		LIS_tppLista Suc=LIS_CriarLista(NULL);
+		LIS_tppLista AuxAnt=LIS_CriarLista(NULL);
+		LIS_tppLista AuxSuc=LIS_CriarLista(NULL);
 		v=pGrafo->No_Corrente;
 		Suc=getLIS_SUC(v);
 		Ant=getLIS_Ant(v) ;
-		while(LIS_AvancarElementoCorrente(Ant,0)!=LIS_CondRetListaVazia) 
+		vertice* a;
+		a=(vertice*)LIS_ObterValor(Ant);
+		AuxAnt=getLIS_Ant(a) ;
+		AuxSuc=getLIS_SUC(a);
+		while(LIS_AvancarElementoCorrente(Ant,1)!=LIS_CondRetFimLista) 
 		{
-			if(LIS_ObterValor(Ant)==v)
-				{
-					LIS_ExcluirElemento(Ant);
-				}
+			LIS_AvancarElementoCorrente(Ant,-1);
+			a=(vertice*)LIS_ObterValor(Ant);
+			AuxSuc=getLIS_SUC(a);
+			while(LIS_ObterValor(AuxSuc)!=v)
+			{
+				LIS_AvancarElementoCorrente(AuxSuc,1);
+			}
+			LIS_ExcluirElemento(AuxSuc) ;
+			LIS_AvancarElementoCorrente(Ant,1);
 		}
-		while(LIS_AvancarElementoCorrente(Suc,0)!=LIS_CondRetListaVazia) 
+		while(LIS_AvancarElementoCorrente(Suc,1)!=LIS_CondRetFimLista) 
 		{
-			if(LIS_ObterValor(Suc)==v)
-				{
-					LIS_ExcluirElemento(Suc);
-				}
+			LIS_AvancarElementoCorrente(Suc,-1);
+			a=(vertice*)LIS_ObterValor(Suc);
+			AuxAnt=getLIS_Ant(a);
+			while(LIS_ObterValor(AuxAnt)!=v)
+			{
+				LIS_AvancarElementoCorrente(AuxAnt,1);
+			}
+			LIS_ExcluirElemento(AuxAnt) ;
+			LIS_AvancarElementoCorrente(Suc,1);
 		}
 		LIS_ExcluirElemento(getLIS_SUC(v)) ;
 		LIS_ExcluirElemento(getLIS_Ant(v)) ;
