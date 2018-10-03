@@ -13,6 +13,7 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data         Observações
+	  8       Rodrigo  02/10/2018   Conserto das funções cria insereobtem e procura mediante testes 
 	  7		  Rodrigo  27/09/2018   Criando as funções de navegação manual 
       6		  Rodrigo  27/09/2018	Criando as funções obtervalor e procurar , estudando navegação "manual" do grafo 
 	  5       Rodrigo  26/07/2018   Termino da implementação da inserção e implementação da função obtervalorcorrente

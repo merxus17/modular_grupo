@@ -105,4 +105,3 @@ typedef enum {
 	grafo_tpCondRet EliminaNo(Grafo  *pGrafo);
 
 
-	grafo_tpCondRet IrInicioGrafo(Grafo* pGrafo);
