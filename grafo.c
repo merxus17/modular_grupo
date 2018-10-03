@@ -207,6 +207,25 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	}
 
 
+	grafo_tpCondRet setValor(Grafo* pGrafo, char* nome ,int Valor)
+	{
+		int p ,s ;
+		p=Procura_No(pGrafo, nome);
+		if (p==0)
+		{
+			
+			return Grafo_CondRetNotFound;
+		}
+		s=setValorVertice((vertice*)LIS_ObterValor(pGrafo->ponteirosHead), Valor);
+		if(s==0)
+		{
+		  return Grafo_CondRetDeuMerda;
+		}
+		return Grafo_CondRetOK;
+
+	
+	}
+
 
 	/*Torna o primeiro Vertice o no corrente*/
 	grafo_tpCondRet IrInicioGrafo(Grafo* pGrafo)

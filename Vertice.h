@@ -9,7 +9,7 @@ typedef struct Vertice vertice;
 vertice* Cria_Vertice(char *nome, int Valor, LIS_tppLista ListaAnt,  LIS_tppLista ListaSuc);
 
 
-
+int setValorVertice(vertice*v,int Valor);
 
 void Destroi_Vertice(vertice *v);
 

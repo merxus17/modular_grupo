@@ -28,7 +28,8 @@
 	 x= Insere_No_Grafo(ppGrafo, nome3,  antC[15], sucC[15], Valor3);
 	 printf("insere:%d\n",x);
 	 //x=ObterValorCorrente(ppGrafo, &valor); 
-	 x=ObterValor(ppGrafo, nome1,&valor);
+	 x=setValor(ppGrafo,  nome2 , 17);
+	 x=ObterValor(ppGrafo, nome2,&valor);
 	 printf(" condição %d\n",x);
 	 printf(" valor: %d\n",valor);
 	 return 0;

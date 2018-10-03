@@ -104,4 +104,4 @@ typedef enum {
 	/*Elimina um elemento do grafo */
 	grafo_tpCondRet EliminaNo(Grafo  *pGrafo);
 
-
+	grafo_tpCondRet setValor(Grafo* pGrafo, char* nome ,int Valor);

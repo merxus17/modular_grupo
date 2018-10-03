@@ -37,6 +37,15 @@ void Destroi_Vertice(vertice* v)
 	free(v);
 }
 
+int setValorVertice(vertice*v,int Valor)
+{
+	if(v!=NULL)
+	{
+		v->Valor=Valor;
+		return 1;
+	}
+	return 0;
+}
 
 
 char* getNome(vertice* v)
