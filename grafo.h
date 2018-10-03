@@ -53,7 +53,8 @@ typedef enum {
 
 		 	 	 Grafo_CondRetNotFound,
 					
-				 Grafo_CondRetFimDoGrafo
+				 Grafo_CondRetFimDoGrafo,
+				 Grafo_CondRetGrafoVazio
 
    } grafo_tpCondRet ;
 
@@ -102,3 +103,6 @@ typedef enum {
 	grafo_tpCondRet Avanca_Corrente(Grafo *pGrafo, int n);
 	/*Elimina um elemento do grafo */
 	grafo_tpCondRet EliminaNo(Grafo  *pGrafo);
+
+
+	grafo_tpCondRet IrInicioGrafo(Grafo* pGrafo);

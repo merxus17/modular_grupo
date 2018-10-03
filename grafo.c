@@ -170,21 +170,13 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	/*Trecho em Obra  ,Desculpe o transtorno   */
 	void Procura_No(Grafo* pGrafo, char* nome)
 	{
-		//SeiLÀ	dfs
+		//grafo_tpCondRet x;
 		LIS_tppLista visitados;
-		IrInicioLista(pGrafo->ponteirosHead);
-		visitados = LIS_CriarLista(NULL);
-		while (strcmp(getNome(pGrafo->No_Corrente) ,nome)!=0)
+		IrInicioLista(pGrafo->ponteirosHead ) ;
+		while (strcmp(getNome((vertice*)LIS_ObterValor(pGrafo->ponteirosHead)) ,nome)!=0)
 		{ 
 			LIS_AvancarElementoCorrente(pGrafo->ponteirosHead, 1);			
-		}
-			
-			/*for each w adjacent to i
-				if (!visited[w])
-					DFS(w);*/
-
-		
-	
+		}	
 	}
 
 
@@ -198,7 +190,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	{
 		grafo_tpCondRet x;
 		Procura_No(pGrafo, nome);
-		x = ObterValorCorrente(pGrafo, Valor);
+		*Valor=getValor((vertice*)LIS_ObterValor(pGrafo->ponteirosHead));
 		return Grafo_CondRetOK;
 	}
 
@@ -207,7 +199,14 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	/*Torna o primeiro Vertice o no corrente*/
 	grafo_tpCondRet IrInicioGrafo(Grafo* pGrafo)
 	{
+		vertice* v;
 		IrInicioLista(pGrafo->ponteirosHead);
+		v=(vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
+		if(v==NULL)
+		{
+		return Grafo_CondRetGrafoVazio;
+		}
+		pGrafo->No_Corrente=v;
 		return Grafo_CondRetOK;
 	}
 
@@ -235,6 +234,8 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		return Grafo_CondRetOK;
 	}
 
+
+	
 	/* A Função chama a função de eliminar o elemento da lista, tanto na lista de antecessores quanto na de sucessores e depois remove o elemento em sí*/
 	grafo_tpCondRet EliminaNo(Grafo  *pGrafo)
 	{
