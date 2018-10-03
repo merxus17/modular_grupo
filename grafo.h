@@ -1,42 +1,41 @@
 /***************************************************************************
-*  $MCD M�dulo de defini��o: Grafo
+*  $MCD Módulo de definiçãoo: Grafo
 *
 *  Arquivo gerado:              grafo.h
 *  Letras identificadoras:      grafo
 *
-*  Nome da base de software:    Arcabou�o para a automa��o de testes de programas redigidos em C
+*  Nome da base de software:    Arcabouço para a automação de testes de programas redigidos em C
 *  Arquivo da base de software:
 *
-*  Projeto: INF 1301 / 1628 Automatiza��o dos testes de m�dulos C
+*  Projeto: INF 1301 / 1628 Automatização dos testes de módulos C
 *  Gestor:  LES/DI/PUC-Rio
 *  Autores: ere
 *
-*  $HA Hist�rico de evolu��o:
-*     Vers�o  Autor    Data     Observa��es
-*     1       ere   18/set/2018 in�cio desenvolvimento
+*  $HA Histórico de evolução:
+*     Versão  Autor    Data     Observações
+*     1       ere   18/set/2018 início desenvolvimento
 *
 ***************************************************************************/
 
 
 
-	#include "LISTA.H"
+#include "LISTA.H"
 
 
- /* Tipo refer�ncia para um v�rtice do grafo */
+ /* Tipo referência para um vértice do grafo */
 
  typedef struct Vertice Vertice;
 
- /* Tipo refer�ncia para um grafo */
+ /* Tipo referência para um grafo */
  typedef struct Grafo Grafo;
 
 
  /***********************************************************************
 *
-*  $TC Tipo de dados: grafo Condi��es de retorno
+*  $TC Tipo de dados: grafo Condições de retorno
 *
-*
-*  $ED Descri��o do tipo
-*     Condi��es de retorno das fun��es do grafo
+*  $ED Descriçõeo do tipo
+*     Condições de retorno das funções do grafo
 *
 ***********************************************************************/
 typedef enum {
@@ -45,63 +44,132 @@ typedef enum {
                /* Concluiu corretamente */
 
          Grafo_CondRetNaoAchou ,
-               /* N�o encontrou o valor procurado */
+               /* Não encontrou o valor procurado */
 
          Grafo_CondRetFaltouMemoria,
-               /* Faltou mem�ria ao tentar criar (...)*/
-		 		 Grafo_CondRetDeuMerda,
-
-		 	 	 Grafo_CondRetNotFound,
-					
-				 Grafo_CondRetFimDoGrafo,
-				 Grafo_CondRetGrafoVazio
+               /* Faltou memória ao tentar criar */
+	 Grafo_CondRetDeuMerda,
+		/* */
+		
+	 Grafo_CondRetNotFound,
+		/**/		
+	 Grafo_CondRetFimDoGrafo,
+		/**/
+	 Grafo_CondRetGrafoVazio
+		/**/
 
    } grafo_tpCondRet ;
 
 
 /***********************************************************************
 *
-*  $FC Fun��o:
-*
-*  $ED Descri��o da fun��o
-*     Cria o grafo alocando a lista de ponteiros para os vertices e a propria lista de vertices e o no corrente como null
-*
-*  $EP Par�metros
-*
+*  $FC Função:
+*	Cria Grafo
+*  $ED Descrição da função
+*       Cria o grafo alocando a lista de ponteiros para os vertices e a propria lista de vertices e o no corrente como null
+*  $EP Parâmetros
+*	
 *
 *  $FV Valor retornado
 *
 *
 ***********************************************************************/
    grafo_tpCondRet CriaGrafo(Grafo** ppGrafo);
-	/*
-		Insere o nó no grafo  e acertar as ligações direcionadas
-		pGrafo- ponteiro pro Grafo 
-		nome- rotulo do no 
-		ListAnt- Lista de Antecessores
-		ListSuc-Lista de Sucessores
-		Valor-Valor arbitrario atribuido ao no 
 
-	*/
+
+/**********************************************************************
+* $FC Função:
+*	Insere No Grafo
+* $ED Descrição da função
+*		Insere o nó no grafo  e acertar as ligações direcionadas
+* $EP Parâmetros
+*		pGrafo- ponteiro pro Grafo 
+*		nome- rotulo do no 
+*		ListAnt- Lista de Antecessores
+*		ListSuc-Lista de Sucessores
+*		Valor-Valor arbitrario atribuido ao no 
+* $FV Valor retornado
+***********************************************************************/
 	grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], char ant[],char suc[], int Valor);
 
-	/*Acha o Valor de um no através de um nome 
-		pGrafo- ponteiro pro Grafo 
-		nome- rotulo do no 
-		Valor- o valor a ser retornado 
-	*/
+/***********************************************************************
+* $FC Função:
+*	Obter Valor
+* $ED Descrição da função:
+*	Acha o Valor de um no através de um nome 
+* $EP Parâmetros:
+*		pGrafo- ponteiro pro Grafo 
+*		nome- rotulo do no 
+*		Valor- o valor a ser retornado 
+* $FV Valor retornado:
+*************************************************************************/
 	grafo_tpCondRet ObterValor(Grafo  *pGrafo, char *nome, int *Valor);
-	/*
-	 Obtem o valor do no corrente 
-	*/
-	grafo_tpCondRet ObterValorCorrente(Grafo *pGrafo, int *Valor);
-	/* Obtem o primeiro no inserido no grafo */
-	grafo_tpCondRet IrInicioGrafo(Grafo *pGrafo);
-	/*Obtem o ultimo no inserido no grafo */
-	grafo_tpCondRet IrFinalGrafo(Grafo *pGrafo);
-	/*Avança o no corrente para frente ou pra tras baseado no n */
-	grafo_tpCondRet Avanca_Corrente(Grafo *pGrafo, int n);
-	/*Elimina um elemento do grafo */
-	grafo_tpCondRet EliminaNo(Grafo  *pGrafo);
 
+/*************************************************************************
+* $FC Função:
+*	Obter Valor Corrente
+* $ED Descrição da função:
+*	 Obtem o valor do no corrente
+* $EP Parâmetros:
+*		pGrafo- ponteiro pro Grafo 
+*		Valor-  
+* $FV Valor retornado: 
+**************************************************************************/
+	grafo_tpCondRet ObterValorCorrente(Grafo *pGrafo, int *Valor);
+
+/*************************************************************************
+* $FC Função:
+*	Ir Inicio Grafo
+* $ED Descrição da função:
+*	Obtem o primeiro no inserido no grafo
+* $EP Parâmetros:
+*	pGrafo- ponteiro pro Grafo 
+* $FV Valor retornado:
+***************************************************************************/
+	grafo_tpCondRet IrInicioGrafo(Grafo *pGrafo);
+
+/*************************************************************************
+* $FC Função:
+*	Ir Final Grafo
+* $ED Descrição da função:
+*	Obtem o ultimo no inserido no grafo
+* $EP Parâmetros:
+*		pGrafo- ponteiro pro Grafo 
+* $FV Valor retornado:	 
+ *************************************************************************/
+	grafo_tpCondRet IrFinalGrafo(Grafo *pGrafo);
+
+/*************************************************************************
+* $FC Função:
+*	Avança Corrente
+* $ED Descrição da função:
+*	Avança o no corrente para frente ou pra tras baseado no n 
+* $EP Parâmetros:
+*		pGrafo - ponteiro pro Grafo 
+*		n -
+* $FV Valor retornado:	
+***************************************************************************/
+	grafo_tpCondRet Avanca_Corrente(Grafo *pGrafo, int n);
+
+/************************************************************************
+* $FC Função:
+*	Elimina No
+* $ED Descrição da função:
+*	Elimina um elemento do grafo
+* $EP Parâmetros:
+*	pGrafo- ponteiro pro Grafo 	
+* $FV Valor retornado:	 
+*************************************************************************/
+	grafo_tpCondRet EliminaNo(Grafo  *pGrafo);
+/*
+$FC Função:
+*	Set Valor
+* $ED Descrição da função:
+*	
+* $EP Parâmetros:
+*		pGrafo- ponteiro pro Grafo 
+*		nome- rotulo do no 
+*		Valor- 
+* $FV Valor retornado:
+*/
 	grafo_tpCondRet setValor(Grafo* pGrafo, char* nome ,int Valor);
