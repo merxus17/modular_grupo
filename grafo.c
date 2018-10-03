@@ -168,16 +168,22 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 
 	
 	/*Trecho em Obra  ,Desculpe o transtorno   */
-	void Procura_No(Grafo* pGrafo, char* nome)
+	int  Procura_No(Grafo* pGrafo, char* nome)
 	{
-		//grafo_tpCondRet x;
+		LIS_tpCondRet x;
 		LIS_tppLista visitados;
-		IrInicioLista(pGrafo->ponteirosHead ) ;
+		IrInicioLista(pGrafo->ponteirosHead );
 		while (strcmp(getNome((vertice*)LIS_ObterValor(pGrafo->ponteirosHead)) ,nome)!=0)
 		{ 
-			LIS_AvancarElementoCorrente(pGrafo->ponteirosHead, 1);			
+			x=LIS_AvancarElementoCorrente(pGrafo->ponteirosHead, 1);
+			if(x==LIS_CondRetFimLista)
+			{
+				return 0;
+			}
 		}	
+	return 1;
 	}
+
 
 
 
@@ -189,7 +195,12 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	grafo_tpCondRet ObterValor(Grafo* pGrafo, char* nome, int* Valor)
 	{
 		grafo_tpCondRet x;
-		Procura_No(pGrafo, nome);
+		int p =Procura_No(pGrafo, nome);
+		if (p==0)
+		{
+			*Valor=NULL;
+			return Grafo_CondRetNotFound;
+		}
 		*Valor=getValor((vertice*)LIS_ObterValor(pGrafo->ponteirosHead));
 		return Grafo_CondRetOK;
 	}
