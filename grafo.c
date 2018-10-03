@@ -239,6 +239,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	grafo_tpCondRet EliminaNo(Grafo  *pGrafo)
 	{
 		vertice* v;
+		vertice* a;
 		LIS_tppLista Ant=LIS_CriarLista(NULL);
 		LIS_tppLista Suc=LIS_CriarLista(NULL);
 		LIS_tppLista AuxAnt=LIS_CriarLista(NULL);
@@ -246,7 +247,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		v=pGrafo->No_Corrente;
 		Suc=getLIS_SUC(v);
 		Ant=getLIS_Ant(v) ;
-		vertice* a;
+		
 		a=(vertice*)LIS_ObterValor(Ant);
 		AuxAnt=getLIS_Ant(a) ;
 		AuxSuc=getLIS_SUC(a);
