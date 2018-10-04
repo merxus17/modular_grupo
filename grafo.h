@@ -90,7 +90,7 @@ typedef enum {
 *		Valor-Valor arbitrario atribuido ao no 
 * $FV Valor retornado
 ***********************************************************************/
-	grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], char ant[],char suc[], int Valor);
+   grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo, char nome[150], char ant[][15], char suc[][15], int Valor);
 
 /***********************************************************************
 * $FC Função:
@@ -150,8 +150,7 @@ typedef enum {
 * $FV Valor retornado:	
 ***************************************************************************/
 	grafo_tpCondRet Avanca_Corrente(Grafo *pGrafo, int n);
-<<<<<<< HEAD
-<<<<<<< HEAD
+
 	/*Elimina um elemento do grafo */
 	/***********************************************************************
 *
@@ -174,9 +173,7 @@ typedef enum {
 *
 ***********************************************************************/
 	grafo_tpCondRet EliminaNo(Grafo  *pGrafo);
-=======
-=======
->>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
+
 
 /************************************************************************
 * $FC Função:
@@ -200,7 +197,4 @@ $FC Função:
 * $FV Valor retornado:
 */
 	grafo_tpCondRet setValor(Grafo* pGrafo, char* nome ,int Valor);
-<<<<<<< HEAD
->>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
-=======
->>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
+

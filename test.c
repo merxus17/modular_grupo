@@ -15,7 +15,7 @@
 	 char antA[][15]={NULL};
 	 char antB[][15]={"A"};
 	 char antC[][15]={"B"};
-	 int Valor1=4, Valor2=5,Valor3=6;
+	 int Valor1 = 4, Valor2 = 5, Valor3 = 6;
 	 char sucA[][15]={NULL};
 	 char sucB[][15]={"A"};
 	 char sucC[][15]={"B"};
