@@ -43,16 +43,13 @@ typedef enum {
          Grafo_CondRetOK ,
                /* Concluiu corretamente */
 
-         Grafo_CondRetNaoAchou ,
-               /* Não encontrou o valor procurado */
-
          Grafo_CondRetFaltouMemoria,
                /* Faltou memória ao tentar criar */
 	 Grafo_CondRetDeuMerda,
 		/* */
 		
 	 Grafo_CondRetNotFound,
-		/**/		
+		/* Não encontrou o valor procurado */
 	 Grafo_CondRetFimDoGrafo,
 		/**/
 	 Grafo_CondRetGrafoVazio
@@ -71,7 +68,8 @@ typedef enum {
 *	
 *
 *  $FV Valor retornado
-*
+*	Grafo_CondRetFaltouMemoria
+*	Grafo_CondRetOk
 *
 ***********************************************************************/
    grafo_tpCondRet CriaGrafo(Grafo** ppGrafo);
@@ -89,6 +87,8 @@ typedef enum {
 *		ListSuc-Lista de Sucessores
 *		Valor-Valor arbitrario atribuido ao no 
 * $FV Valor retornado
+*	Grafo_CondRetDeuMerda
+*	Grafo_CondRetOk
 ***********************************************************************/
    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo, char nome[150], char ant[][15], char suc[][15], int Valor);
 
@@ -102,6 +102,9 @@ typedef enum {
 *		nome- rotulo do no 
 *		Valor- o valor a ser retornado 
 * $FV Valor retornado:
+*	Grafo_CondRetNotFound
+*	Grafo_ContRetGrafoVazio
+*	Grafo_CondRetOk
 *************************************************************************/
 	grafo_tpCondRet ObterValor(Grafo  *pGrafo, char *nome, int *Valor);
 
@@ -112,8 +115,10 @@ typedef enum {
 *	 Obtem o valor do no corrente
 * $EP Parâmetros:
 *		pGrafo- ponteiro pro Grafo 
-*		Valor-  
+*		Valor-  ponteiro que recebe o valor
 * $FV Valor retornado: 
+*	Grafo_CondRetGrafoVazio
+*	Grafo_CondRetOk
 **************************************************************************/
 	grafo_tpCondRet ObterValorCorrente(Grafo *pGrafo, int *Valor);
 
@@ -125,6 +130,8 @@ typedef enum {
 * $EP Parâmetros:
 *	pGrafo- ponteiro pro Grafo 
 * $FV Valor retornado:
+*	Grafo_CondRetGRafoVazio
+*	Grafo_CondRetOk
 ***************************************************************************/
 	grafo_tpCondRet IrInicioGrafo(Grafo *pGrafo);
 
@@ -136,6 +143,7 @@ typedef enum {
 * $EP Parâmetros:
 *		pGrafo- ponteiro pro Grafo 
 * $FV Valor retornado:	 
+*	Grafo_CondRetOk
  *************************************************************************/
 	grafo_tpCondRet IrFinalGrafo(Grafo *pGrafo);
 
@@ -148,45 +156,39 @@ typedef enum {
 *		pGrafo - ponteiro pro Grafo 
 *		n -
 * $FV Valor retornado:	
+*	Grafo_CondRetFimDoGrafo
+*	Grafo_CondRetVazio
+*	Grafo_CondRetOk
 ***************************************************************************/
 	grafo_tpCondRet Avanca_Corrente(Grafo *pGrafo, int n);
 
-	/*Elimina um elemento do grafo */
-	/***********************************************************************
+	
+/***********************************************************************
 *
-*  $FC Fun��o: 
-*
-*  $ED Descri��o da fun��o
+*  $FC Função: 
+*	Elimina um elemento do grafo 
+*  $ED Descrição da função
 *     Elimina o elemento corrente de um Grafo
 *		Se esse elemento possuir antecessores ou sucessores 
 *		ele será eliminado das listas de sucessores ou antecessores das mesmas
 *		
 *
-*  $EP Par�metros
+*  $EP Parâmetros
 *			pGrafo - Ponteiro de Grafo do qual será removido o elemento corrente
 *
 *
 *  $FV Valor retornado
-*			CondRetOK - se o Elemento tiver sido removido
-*			Grafo_CondRetNaoAchou - se não houver elemento corrente, então nada ocorre
+*			Grafo_CondRetOK 
+*			Grafo_CondRetNotFound 
+*			Grafo_CondRetVazio
 *			
 *
 ***********************************************************************/
 	grafo_tpCondRet EliminaNo(Grafo  *pGrafo,char* nome);
 
 
-/************************************************************************
+/*********************************************************************
 * $FC Função:
-*	Elimina No
-* $ED Descrição da função:
-*	Elimina um elemento do grafo
-* $EP Parâmetros:
-*	pGrafo- ponteiro pro Grafo 	
-* $FV Valor retornado:	 
-*************************************************************************/
-	grafo_tpCondRet EliminaNo(Grafo  *pGrafo);
-/*
-$FC Função:
 *	Set Valor
 * $ED Descrição da função:
 *	
@@ -195,6 +197,9 @@ $FC Função:
 *		nome- rotulo do no 
 *		Valor- 
 * $FV Valor retornado:
-*/
+*		Grafo_CondRetNotFound
+*		Grafo_CondRetVazio
+*		Grafo CondRetDeuMerda
+*************************************************************************/
 	grafo_tpCondRet setValor(Grafo* pGrafo, char* nome ,int Valor);
 
