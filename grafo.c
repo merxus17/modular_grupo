@@ -291,15 +291,8 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		}
 		Suc=getLIS_SUC(v);
 		Ant=getLIS_Ant(v) ;
-<<<<<<< HEAD
-<<<<<<< HEAD
 		vertice* a=(vertice*)LIS_ObterValor(Ant);
-=======
-=======
->>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
-		
 		a=(vertice*)LIS_ObterValor(Ant);
->>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
 		AuxAnt=getLIS_Ant(a) ;
 		AuxSuc=getLIS_SUC(a);
 		while(LIS_AvancarElementoCorrente(Ant,1)!=LIS_CondRetFimLista) 
