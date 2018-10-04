@@ -13,6 +13,11 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data         Observações
+<<<<<<< HEAD
+	  8		  Eduardo  03/10/2018   Esqueci que tinha que datar essas coisas, mas finalmente terminei a EliminaNo com assertivas
+=======
+	  8       Rodrigo  02/10/2018   Conserto das funções cria insereobtem e procura mediante testes 
+>>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
 	  7		  Rodrigo  27/09/2018   Criando as funções de navegação manual 
       6		  Rodrigo  27/09/2018	Criando as funções obtervalor e procurar , estudando navegação "manual" do grafo 
 	  5       Rodrigo  26/07/2018   Termino da implementação da inserção e implementação da função obtervalorcorrente
@@ -168,24 +173,22 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 
 	
 	/*Trecho em Obra  ,Desculpe o transtorno   */
-	void Procura_No(Grafo* pGrafo, char* nome)
+	int  Procura_No(Grafo* pGrafo, char* nome)
 	{
-		//SeiLÀ	dfs
+		LIS_tpCondRet x;
 		LIS_tppLista visitados;
-		IrInicioLista(pGrafo->ponteirosHead);
-		visitados = LIS_CriarLista(NULL);
-		while (strcmp(getNome(pGrafo->No_Corrente) ,nome)!=0)
+		IrInicioLista(pGrafo->ponteirosHead );
+		while (strcmp(getNome((vertice*)LIS_ObterValor(pGrafo->ponteirosHead)) ,nome)!=0)
 		{ 
-			LIS_AvancarElementoCorrente(pGrafo->ponteirosHead, 1);			
-		}
-			
-			/*for each w adjacent to i
-				if (!visited[w])
-					DFS(w);*/
-
-		
-	
+			x=LIS_AvancarElementoCorrente(pGrafo->ponteirosHead, 1);
+			if(x==LIS_CondRetFimLista)
+			{
+				return 0;
+			}
+		}	
+	return 1;
 	}
+
 
 
 
@@ -197,17 +200,48 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	grafo_tpCondRet ObterValor(Grafo* pGrafo, char* nome, int* Valor)
 	{
 		grafo_tpCondRet x;
-		Procura_No(pGrafo, nome);
-		x = ObterValorCorrente(pGrafo, Valor);
+		int p =Procura_No(pGrafo, nome);
+		if (p==0)
+		{
+			*Valor=NULL;
+			return Grafo_CondRetNotFound;
+		}
+		*Valor=getValor((vertice*)LIS_ObterValor(pGrafo->ponteirosHead));
 		return Grafo_CondRetOK;
 	}
 
+
+	grafo_tpCondRet setValor(Grafo* pGrafo, char* nome ,int Valor)
+	{
+		int p ,s ;
+		p=Procura_No(pGrafo, nome);
+		if (p==0)
+		{
+			
+			return Grafo_CondRetNotFound;
+		}
+		s=setValorVertice((vertice*)LIS_ObterValor(pGrafo->ponteirosHead), Valor);
+		if(s==0)
+		{
+		  return Grafo_CondRetDeuMerda;
+		}
+		return Grafo_CondRetOK;
+
+	
+	}
 
 
 	/*Torna o primeiro Vertice o no corrente*/
 	grafo_tpCondRet IrInicioGrafo(Grafo* pGrafo)
 	{
+		vertice* v;
 		IrInicioLista(pGrafo->ponteirosHead);
+		v=(vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
+		if(v==NULL)
+		{
+		return Grafo_CondRetGrafoVazio;
+		}
+		pGrafo->No_Corrente=v;
 		return Grafo_CondRetOK;
 	}
 
@@ -235,19 +269,30 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		return Grafo_CondRetOK;
 	}
 
+
+	
 	/* A Função chama a função de eliminar o elemento da lista, tanto na lista de antecessores quanto na de sucessores e depois remove o elemento em sí*/
 	grafo_tpCondRet EliminaNo(Grafo  *pGrafo)
 	{
 		vertice* v;
+		vertice* a;
 		LIS_tppLista Ant=LIS_CriarLista(NULL);
 		LIS_tppLista Suc=LIS_CriarLista(NULL);
 		LIS_tppLista AuxAnt=LIS_CriarLista(NULL);
 		LIS_tppLista AuxSuc=LIS_CriarLista(NULL);
 		v=pGrafo->No_Corrente;
+		if(v==NULL)
+		{
+			return Grafo_CondRetNaoAchou;
+		}
 		Suc=getLIS_SUC(v);
 		Ant=getLIS_Ant(v) ;
-		vertice* a;
+<<<<<<< HEAD
+		vertice* a=(vertice*)LIS_ObterValor(Ant);
+=======
+		
 		a=(vertice*)LIS_ObterValor(Ant);
+>>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
 		AuxAnt=getLIS_Ant(a) ;
 		AuxSuc=getLIS_SUC(a);
 		while(LIS_AvancarElementoCorrente(Ant,1)!=LIS_CondRetFimLista) 
