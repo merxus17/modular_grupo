@@ -307,7 +307,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		}
 		Suc=getLIS_SUC(v);
 		Ant=getLIS_Ant(v) ;
-		vertice* a=(vertice*)LIS_ObterValor(Ant);
+		a=(vertice*)LIS_ObterValor(Ant);
 		a=(vertice*)LIS_ObterValor(Ant);
 		a=(vertice*)LIS_ObterValor(Ant);
 		AuxAnt=getLIS_Ant(a) ;
