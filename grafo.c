@@ -171,16 +171,24 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	/*Trecho em Obra  ,Desculpe o transtorno   */
 	int  Procura_No(Grafo* pGrafo, char* nome)
 	{
+
 		LIS_tpCondRet x;
+		
 		IrInicioLista(pGrafo->ponteirosHead );
 		while (strcmp(getNome((vertice*)LIS_ObterValor(pGrafo->ponteirosHead)) ,nome)!=0)
 		{ 
 			x=LIS_AvancarElementoCorrente(pGrafo->ponteirosHead, 1);
 			if(x==LIS_CondRetFimLista)
 			{
+				
 				return 0;
 			}
+			if (x ==LIS_CondRetListaVazia)
+			{
+				return -1;
+			}
 		}	
+
 	return 1;
 	}
 
@@ -201,6 +209,11 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 			*Valor=NULL;
 			return Grafo_CondRetNotFound;
 		}
+		if(p==-1)
+		{
+			*Valor = NULL;
+			return Grafo_CondRetGrafoVazio;
+		}
 		*Valor=getValor((vertice*)LIS_ObterValor(pGrafo->ponteirosHead));
 		return Grafo_CondRetOK;
 	}
@@ -214,6 +227,10 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		{
 			
 			return Grafo_CondRetNotFound;
+		}
+		if (p == -1)
+		{
+			return Grafo_CondRetGrafoVazio;
 		}
 		s=setValorVertice((vertice*)LIS_ObterValor(pGrafo->ponteirosHead), Valor);
 		if(s==0)
@@ -259,6 +276,10 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		{
 			return Grafo_CondRetFimDoGrafo;
 		}
+		if (x == LIS_CondRetListaVazia)
+		{
+			return Grafo_CondRetGrafoVazio;
+		}
 
 		return Grafo_CondRetOK;
 	}
@@ -266,8 +287,13 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 
 	
 	/* A Função chama a função de eliminar o elemento da lista, tanto na lista de antecessores quanto na de sucessores e depois remove o elemento em sí*/
-	grafo_tpCondRet EliminaNo(Grafo  *pGrafo)
+	grafo_tpCondRet EliminaNo(Grafo  *pGrafo,char* nome[][15] )
 	{
+		int i=Procura_No(pGrafo, nome);
+		if (i == 0)
+		{
+			return Grafo_CondRetNotFound;
+		}
 		vertice* v;
 		vertice* a;
 		LIS_tppLista Ant=LIS_CriarLista(NULL);
@@ -277,7 +303,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		v=(vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
 		if(v==NULL)
 		{
-			return Grafo_CondRetNaoAchou;
+			return Grafo_CondRetGrafoVazio;
 		}
 		Suc=getLIS_SUC(v);
 		Ant=getLIS_Ant(v) ;

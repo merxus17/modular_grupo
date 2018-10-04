@@ -172,7 +172,7 @@ typedef enum {
 *			
 *
 ***********************************************************************/
-	grafo_tpCondRet EliminaNo(Grafo  *pGrafo);
+	grafo_tpCondRet EliminaNo(Grafo  *pGrafo,char* nome);
 
 
 /************************************************************************

@@ -6,7 +6,7 @@
 
  int main (void)
  {
-	 int valor1=0,valor2=0;
+	 int valor1=0,valor2=0,valor3=0;
 	 Grafo* ppGrafo=0;
 	 char nome1[]="A";
 	 char nome2[]="B";
@@ -28,11 +28,19 @@
 	 x= Insere_No_Grafo(ppGrafo, nome3,  antC[15], sucC[15], Valor3);
 	 //printf("insere:%d\n",x);
 	 //x=ObterValorCorrente(ppGrafo, &valor); 
-	 x=setValor(ppGrafo,  nome1 , 17);
+	 x=setValor(ppGrafo,  nome4 , 17);
+	 printf(" condição %d\n", x);
 	 x=ObterValor(ppGrafo, nome2,&valor2);
 	 x = ObterValor(ppGrafo, nome1, &valor1);
-	 printf(" condição %d\n",x);
+	 
 	 printf(" valor: %d  %d\n",valor1,valor2);
+
+	 //x= EliminaNo(ppGrafo,nome4);
+	 printf(" condição %d\n", x);
+	 x = ObterValor(ppGrafo, nome4, &valor3);
+	 printf(" condição %d\n", x);
+	 printf(" valor: %d  %d\n", valor1, valor2);
+
 	 return 0;
 
  }
