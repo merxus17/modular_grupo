@@ -13,15 +13,11 @@
 *
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data         Observações
-<<<<<<< HEAD
-<<<<<<< HEAD
-	  8		  Eduardo  03/10/2018   Esqueci que tinha que datar essas coisas, mas finalmente terminei a EliminaNo com assertivas
-=======
+
+	  9		  Eduardo  03/10/2018   Esqueci que tinha que datar essas coisas, mas finalmente terminei a EliminaNo com assertiva
+	 
 	  8       Rodrigo  02/10/2018   Conserto das funções cria insereobtem e procura mediante testes 
->>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
-=======
-	  8       Rodrigo  02/10/2018   Conserto das funções cria insereobtem e procura mediante testes 
->>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
+
 	  7		  Rodrigo  27/09/2018   Criando as funções de navegação manual 
       6		  Rodrigo  27/09/2018	Criando as funções obtervalor e procurar , estudando navegação "manual" do grafo 
 	  5       Rodrigo  26/07/2018   Termino da implementação da inserção e implementação da função obtervalorcorrente
@@ -59,10 +55,9 @@ typedef struct Vertice Vertice;
       LIS_tppLista ponteirosHead;
 			/*que aponta para os vertices de forma similar a uma lista de adjacencias*/
 
-    //  Vertice* ponteirosVertices;
-			/*aguarda as estruturas dos vertices , estou considerando usar apenas um vetor ja que ponteirosHead já aponta pro Vertices*/
+    
 
-      Vertice* No_Corrente;
+     // Vertice* No_Corrente;
 			 /*No_Corrente aponta para no corrente */
 
     }Grafo;
@@ -75,18 +70,15 @@ typedef struct Vertice Vertice;
     {
 		
 	  Grafo *pGrafo=(Grafo*)malloc(sizeof(Grafo));
-	  printf("%p %p \n",&ppGrafo,&pGrafo);
+	 
 	  if(pGrafo==NULL)
       {
         return Grafo_CondRetFaltouMemoria;
       }
 	 
       pGrafo->ponteirosHead=LIS_CriarLista(NULL);
-     // ponteiroGrafo->ponteirosVertices=NULL;
-      pGrafo->No_Corrente=NULL;
-
-	  *ppGrafo=pGrafo;
-	  printf("%p %p %p\n",*ppGrafo,ppGrafo,pGrafo);
+      *ppGrafo=pGrafo;
+	
       return Grafo_CondRetOK;
     }
 	 
@@ -155,8 +147,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
         return Grafo_CondRetDeuMerda;/*isso é TEMPORARIO*/
       }
       Completa_Arestas(pGrafo,novo,ListaAnt,ListaSuc);
-	  pGrafo->No_Corrente = novo;
-      return Grafo_CondRetOK;
+	  return Grafo_CondRetOK;
     }
 	
 	
@@ -166,11 +157,12 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	  Valor - ponteiro que recebe o valor */
 	grafo_tpCondRet ObterValorCorrente(Grafo* pGrafo, int* Valor)
 	{
-		if(pGrafo->No_Corrente==NULL)
+		Vertice* Corrente = (Vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
+		if(Corrente==NULL)
 		{
-			return Grafo_CondRetNotFound;
+			return Grafo_CondRetGrafoVazio;
 		}
-		*Valor = getValor(pGrafo->No_Corrente);
+		*Valor = getValor(Corrente);
 		return Grafo_CondRetOK;
 	}
 
@@ -180,7 +172,6 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	int  Procura_No(Grafo* pGrafo, char* nome)
 	{
 		LIS_tpCondRet x;
-		LIS_tppLista visitados;
 		IrInicioLista(pGrafo->ponteirosHead );
 		while (strcmp(getNome((vertice*)LIS_ObterValor(pGrafo->ponteirosHead)) ,nome)!=0)
 		{ 
@@ -203,7 +194,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		*/
 	grafo_tpCondRet ObterValor(Grafo* pGrafo, char* nome, int* Valor)
 	{
-		grafo_tpCondRet x;
+
 		int p =Procura_No(pGrafo, nome);
 		if (p==0)
 		{
@@ -245,7 +236,6 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		{
 		return Grafo_CondRetGrafoVazio;
 		}
-		pGrafo->No_Corrente=v;
 		return Grafo_CondRetOK;
 	}
 
@@ -284,7 +274,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		LIS_tppLista Suc=LIS_CriarLista(NULL);
 		LIS_tppLista AuxAnt=LIS_CriarLista(NULL);
 		LIS_tppLista AuxSuc=LIS_CriarLista(NULL);
-		v=pGrafo->No_Corrente;
+		v=(vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
 		if(v==NULL)
 		{
 			return Grafo_CondRetNaoAchou;
@@ -292,6 +282,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		Suc=getLIS_SUC(v);
 		Ant=getLIS_Ant(v) ;
 		vertice* a=(vertice*)LIS_ObterValor(Ant);
+		a=(vertice*)LIS_ObterValor(Ant);
 		a=(vertice*)LIS_ObterValor(Ant);
 		AuxAnt=getLIS_Ant(a) ;
 		AuxSuc=getLIS_SUC(a);
