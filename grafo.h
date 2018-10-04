@@ -151,6 +151,7 @@ typedef enum {
 ***************************************************************************/
 	grafo_tpCondRet Avanca_Corrente(Grafo *pGrafo, int n);
 <<<<<<< HEAD
+<<<<<<< HEAD
 	/*Elimina um elemento do grafo */
 	/***********************************************************************
 *
@@ -174,6 +175,8 @@ typedef enum {
 ***********************************************************************/
 	grafo_tpCondRet EliminaNo(Grafo  *pGrafo);
 =======
+=======
+>>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
 
 /************************************************************************
 * $FC Função:
@@ -197,4 +200,7 @@ $FC Função:
 * $FV Valor retornado:
 */
 	grafo_tpCondRet setValor(Grafo* pGrafo, char* nome ,int Valor);
+<<<<<<< HEAD
+>>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
+=======
 >>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266

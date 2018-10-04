@@ -14,7 +14,11 @@
 *  $HA Histórico de evolução:
 *     Versão  Autor    Data         Observações
 <<<<<<< HEAD
+<<<<<<< HEAD
 	  8		  Eduardo  03/10/2018   Esqueci que tinha que datar essas coisas, mas finalmente terminei a EliminaNo com assertivas
+=======
+	  8       Rodrigo  02/10/2018   Conserto das funções cria insereobtem e procura mediante testes 
+>>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
 =======
 	  8       Rodrigo  02/10/2018   Conserto das funções cria insereobtem e procura mediante testes 
 >>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
@@ -288,8 +292,11 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		Suc=getLIS_SUC(v);
 		Ant=getLIS_Ant(v) ;
 <<<<<<< HEAD
+<<<<<<< HEAD
 		vertice* a=(vertice*)LIS_ObterValor(Ant);
 =======
+=======
+>>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
 		
 		a=(vertice*)LIS_ObterValor(Ant);
 >>>>>>> 87a9a03e80547da2a0c9c38d8bd31be0b9b38266
