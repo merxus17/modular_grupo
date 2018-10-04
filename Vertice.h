@@ -6,6 +6,17 @@
 
 typedef struct Vertice vertice;
 
+ typedef enum {
+
+         VER_CondRetOK ,
+               /* Concluiu corretamente */
+
+         VER_CondRetVertVazio ,
+               /* O Vertice não contém elementos */
+
+
+   } VER_tpCondRet ;
+
 vertice* Cria_Vertice(char *nome, int Valor, LIS_tppLista ListaAnt,  LIS_tppLista ListaSuc);
 
 

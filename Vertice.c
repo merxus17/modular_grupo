@@ -37,14 +37,14 @@ void Destroi_Vertice(vertice* v)
 	free(v);
 }
 
-int setValorVertice(vertice*v,int Valor)
+VER_tpCondRet setValorVertice(vertice*v,int Valor)
 {
 	if(v!=NULL)
 	{
 		v->Valor=Valor;
-		return 1;
+		return VER_CondRetOK;
 	}
-	return 0;
+	return VER_CondRetVertVazio;
 }
 
 
