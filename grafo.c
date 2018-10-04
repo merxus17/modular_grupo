@@ -70,7 +70,7 @@ typedef struct Vertice Vertice;
     {
 		
 	  Grafo *pGrafo=(Grafo*)malloc(sizeof(Grafo));
-	  printf("%p %p \n",&ppGrafo,&pGrafo);
+	 
 	  if(pGrafo==NULL)
       {
         return Grafo_CondRetFaltouMemoria;
@@ -78,7 +78,7 @@ typedef struct Vertice Vertice;
 	 
       pGrafo->ponteirosHead=LIS_CriarLista(NULL);
       *ppGrafo=pGrafo;
-	  printf("%p %p %p\n",*ppGrafo,ppGrafo,pGrafo);
+	
       return Grafo_CondRetOK;
     }
 	 
