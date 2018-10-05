@@ -71,22 +71,22 @@ LIS_tppLista getLIS_Ant(vertice*v)
 void PrintVertice(vertice* v)
 {
 	char* x;
-	LIS_tpCondRet z=LIS_CondRetOK;
+	//LIS_tpCondRet z=LIS_CondRetOK;
 	printf("%s %d  ",v->Nome,v->Valor) ;
 	IrInicioLista(v->Lista_Antecessores);
 	x=(char*)LIS_ObterValor(v->Lista_Antecessores);
 	printf("lista de antecessores %s\n",x);
 	
-		while (z!=LIS_AvancarElementoCorrente( v->Lista_Antecessores,1))
+		while (LIS_CondRetFimLista !=LIS_AvancarElementoCorrente( v->Lista_Antecessores,1))
 		{
 			x=(char*)LIS_ObterValor(v->Lista_Antecessores);
 			printf(" %s\n",x);
 		}
-	z=LIS_CondRetOK;
+	//z=LIS_CondRetOK;
 	IrInicioLista(v->Lista_Sucessores);
 	x=(char*)LIS_ObterValor(v->Lista_Sucessores);
 	printf("lista de sucessores %s\n",x);
-		while (z!=LIS_AvancarElementoCorrente( v->Lista_Sucessores,1))
+		while (LIS_CondRetFimLista !=LIS_AvancarElementoCorrente( v->Lista_Sucessores,1))
 		{
 			x=(char*)LIS_ObterValor(v->Lista_Sucessores);
 			printf(" %s\n",x);

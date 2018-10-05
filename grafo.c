@@ -348,10 +348,10 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 
 	void PrintGrafo (Grafo* pGrafo)
 	{
-		LIS_tpCondRet x=LIS_CondRetOK;
+		//LIS_tpCondRet x=LIS_CondRetOK;
 		vertice* v;
 		IrInicioLista(pGrafo->ponteirosHead );
-		while (x!=LIS_AvancarElementoCorrente( pGrafo->ponteirosHead,1))
+		while (LIS_CondRetFimLista !=LIS_AvancarElementoCorrente( pGrafo->ponteirosHead,1))
 		{
 			v=(vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
 			PrintVertice(v);
