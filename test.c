@@ -29,17 +29,17 @@
 	 //printf("insere:%d\n",x);
 	 //x=ObterValorCorrente(ppGrafo, &valor); 
 	 x=setValor(ppGrafo,  nome4 , 17);
-	 printf(" condição %d\n", x);
+	// printf(" condição %d\n", x);
 	 x=ObterValor(ppGrafo, nome2,&valor2);
 	 x = ObterValor(ppGrafo, nome1, &valor1);
 	 
-	 printf(" valor: %d  %d\n",valor1,valor2);
-
+	 //printf(" valor: %d  %d\n",valor1,valor2);
+	 PrintGrafo(ppGrafo);
 	 //x= EliminaNo(ppGrafo,nome4);
-	 printf(" condição %d\n", x);
+	 //printf(" condição %d\n", x);
 	 x = ObterValor(ppGrafo, nome4, &valor3);
-	 printf(" condição %d\n", x);
-	 printf(" valor: %d  %d\n", valor1, valor2);
+	 //printf(" condição %d\n", x);
+	 //printf(" valor: %d  %d\n", valor1, valor2);
 
 	 return 0;
 

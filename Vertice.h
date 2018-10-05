@@ -59,3 +59,6 @@ char* getNome(vertice* v);
 int getValor(vertice* v);
 LIS_tppLista getLIS_SUC(vertice*v);
 LIS_tppLista getLIS_Ant(vertice*v);
+
+
+void PrintVertice(vertice* v);
