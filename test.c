@@ -24,14 +24,14 @@
 	 x=CriaGrafo(&ppGrafo);
 	 //printf("cria grafo: %d %p %p\n",x,&ppGrafo,ppGrafo);
 	 x= Insere_No_Grafo(ppGrafo, nome1,  antA[15], sucA[15], Valor1);
-	 x= Insere_No_Grafo(ppGrafo, nome2,  antB[15], sucB[15], Valor2);
-	 x= Insere_No_Grafo(ppGrafo, nome3,  antC[15], sucC[15], Valor3);
+//	 x= Insere_No_Grafo(ppGrafo, nome2,  antB[15], sucB[15], Valor2);
+//	 x= Insere_No_Grafo(ppGrafo, nome3,  antC[15], sucC[15], Valor3);
 	 //printf("insere:%d\n",x);
 	 //x=ObterValorCorrente(ppGrafo, &valor); 
-	 x=setValor(ppGrafo,  nome4 , 17);
+	 //x=setValor(ppGrafo,  nome4 , 17);
 	// printf(" condição %d\n", x);
-	 x=ObterValor(ppGrafo, nome2,&valor2);
-	 x = ObterValor(ppGrafo, nome1, &valor1);
+	 //x=ObterValor(ppGrafo, nome2,&valor2);
+	 //x = ObterValor(ppGrafo, nome1, &valor1);
 	 
 	 //printf(" valor: %d  %d\n",valor1,valor2);
 	 PrintGrafo(ppGrafo);

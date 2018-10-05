@@ -351,6 +351,8 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		//LIS_tpCondRet x=LIS_CondRetOK;
 		vertice* v;
 		IrInicioLista(pGrafo->ponteirosHead );
+		v=(vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
+		PrintVertice(v);
 		while (LIS_CondRetFimLista !=LIS_AvancarElementoCorrente( pGrafo->ponteirosHead,1))
 		{
 			v=(vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
