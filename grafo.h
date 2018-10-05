@@ -90,7 +90,7 @@ typedef enum {
 *	Grafo_CondRetDeuMerda
 *	Grafo_CondRetOk
 ***********************************************************************/
-   grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo, char nome[150], char ant[][15], char suc[][15], int Valor);
+  grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char* nome, char* ant,char* suc, int Valor);
 
 /***********************************************************************
 * $FC Função:
@@ -203,3 +203,4 @@ typedef enum {
 *************************************************************************/
 	grafo_tpCondRet setValor(Grafo* pGrafo, char* nome ,int Valor);
 
+	void PrintGrafo (Grafo* pGrafo);

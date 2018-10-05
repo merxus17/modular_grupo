@@ -120,7 +120,7 @@ typedef struct Vertice Vertice;
 /*A função recebe o grafo no qual vai inserir , o nome do Vertice a ser inserido
 e as listas de vertices succesores e antecessores.Cria o vertice dinamicamente e insere ele no grafo , depois disso
 cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
-    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], char ant[][15],char suc[][15], int Valor)
+    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char* nome, char* ant,char* suc, int Valor)
     {
 	  int i;
 	   Vertice* novo;
@@ -287,19 +287,20 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 
 	
 	/* A Função chama a função de eliminar o elemento da lista, tanto na lista de antecessores quanto na de sucessores e depois remove o elemento em sí*/
-	grafo_tpCondRet EliminaNo(Grafo  *pGrafo,char* nome[][15] )
+	grafo_tpCondRet EliminaNo(Grafo  *pGrafo,char* nome )
 	{
-		int i=Procura_No(pGrafo, nome);
-		if (i == 0)
-		{
-			return Grafo_CondRetNotFound;
-		}
 		vertice* v;
 		vertice* a;
 		LIS_tppLista Ant=LIS_CriarLista(NULL);
 		LIS_tppLista Suc=LIS_CriarLista(NULL);
 		LIS_tppLista AuxAnt=LIS_CriarLista(NULL);
 		LIS_tppLista AuxSuc=LIS_CriarLista(NULL);
+		int i=Procura_No(pGrafo, nome);
+		if (i == 0)
+		{
+			return Grafo_CondRetNotFound;
+		}
+		
 		v=(vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
 		if(v==NULL)
 		{
@@ -345,7 +346,17 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 
 
 
-
+	void PrintGrafo (Grafo* pGrafo)
+	{
+		LIS_tpCondRet x=LIS_CondRetOK;
+		vertice* v;
+		IrInicioLista(pGrafo->ponteirosHead );
+		while (x!=LIS_AvancarElementoCorrente( pGrafo->ponteirosHead,1))
+		{
+			v=(vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
+			PrintVertice(v);
+		}
+	}
 
 
 
