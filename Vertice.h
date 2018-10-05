@@ -50,15 +50,71 @@ vertice* Cria_Vertice(char *nome, int Valor, LIS_tppLista ListaAnt,  LIS_tppList
 *	  VER_CondRetVertVazio se o ponteiro de vertice fornecido esta vazio
 *
 ***********************************************************************/
+
 VER_tpCondRet setValorVertice(vertice*v,int Valor);
 
+
+/***********************************************************************
+*
+*  $FC Função: 
+*		Destroi Vertice
+*  $ED Descrição da função
+*     Destrói o vertice fornecido.
+*
+*  $FV Valor retornado
+*     LIS_CondRetOK    - destruiu sem problemas
+*
+***********************************************************************/
 void Destroi_Vertice(vertice *v);
 
+/***********************************************************************
+*
+*  $FC Função:
+*	getNome
+*  $ED Descrição da função
+*      Devolve o nome do Vertice recebido
+*  $EP Parâmetros
+*		v - Vertice contendo o nome
+*
+*  $FV Valor retornado
+*	char* com o nome do Vertice
+*
+***********************************************************************/
 
 char* getNome(vertice* v);
+
+
+/***********************************************************************
+*
+*  $FC Função:
+*	getValor
+*  $ED Descrição da função
+*      Devolve o valor do Vertice recebido
+*  $EP Parâmetros
+*		v - Vertice contendo o valor
+*
+*  $FV Valor retornado
+*	int com o Valor do vertice
+*
+***********************************************************************/
+
 int getValor(vertice* v);
+
+
 LIS_tppLista getLIS_SUC(vertice*v);
 LIS_tppLista getLIS_Ant(vertice*v);
 
-
+/***********************************************************************
+*
+*  $FC Função:
+*	PrintVertice
+*  $ED Descrição da função
+*      Imprime na tela o Nome, Valor e as listas de sucessores e antecessores do Vertice
+*  $EP Parâmetros
+*		v - Vertice a ser impresso
+*
+*  $FV Valor retornado
+*	A função retorna void após imprimir os valores
+*
+***********************************************************************/
 void PrintVertice(vertice* v);
