@@ -1,5 +1,5 @@
 /***************************************************************************
-*  $MCI MÛdulo de implementaÁ„o: MÛdulo de teste especÌfico
+*  $MCI M√≥dulo de implementa√ß√£o: M√≥dulo de teste espec√≠fico
 *
 *  Arquivo gerado:              TESTAGRAF.C
 *  Letras identificadoras:      TGRAF
@@ -11,155 +11,210 @@
 *  Gestor:  
 *  Autores: ere - Eduardo, Rodrigo ou Evelyn
 *
-*  $HA HistÛrico de evoluÁ„o:
-*     Vers„o    Autor    Data			 ObservaÁıes
-*     0.1		ere		13/09/2018		INÕCIO DO DESENVOLVIMENTO
+*  $HA Hist√≥rico de evolu√ß√£o:
+*     Vers√£o    Autor    Data			 Observa√ß√µes
+*     0.1		ERBS	04/10/2018		IN√çCIO DO DESENVOLVIMENTO 2
 *
-*  $ED DescriÁ„o do mÛdulo
-*     Este modulo contÈm as funÁıes especÌficas para o teste do
-*     mÛdulo GRAFO.
+*  $ED Descri√ß√£o do m√≥dulo
+*     Este modulo cont√©m as fun√ß√µes espec√≠ficas para o teste do
+*     m√≥dulo GRAFO.
 *
-*  $EIU Interface com o usu·rio pessoa
-*     Comandos de teste especÌficos para testar o mÛdulo grafo:
+*  $EIU Interface com o usu√°rio pessoa
+*     Comandos de teste espec√≠ficos para testar o m√≥dulo grafo:
 *
-*     
 *
 ***************************************************************************/
-#include    <string.h>
-#include    <stdio.h>
-#include	"grafo.h"
-#include    "TST_ESPC.H"
-#include    "GENERICO.H"
-#include    "LERPARM.H"
+
+#include <stdio.h>
+#include <string.h>
+#include "grafo.h"
+#include "GENERICO.h"
+#include "TST_ESPC.H"
+#include "LERPARM.H"
 
 
-static const char CRIAR_GRAFO_CMD         [ ] = "=criagrafo"			;
-static const char Insere_No_Grafo_CMD	  [ ] = "inserirnografo"		;
-static const char ObterValor_CMD		  [ ] = "obtemvalor"			;
+static const char CRIAR_GRAFO_CMD         [ ] = "=criagrafo"			; 
+static const char Insere_No_Grafo_CMD	  [ ] = "inserirnografo"		; 
+static const char ObterValor_CMD	  [ ] = "obtemvalor"			; 
 static const char ObterValorCorrente_CMD  [ ] = "obtercorrente"			;
-static const char IrInicioGrafo_CMD		  [ ] = "iriniciografo"			;
-static const char IrFinalGrafo_CMD		  [ ] = "irfinalgrafo"			;
-static const char Avanca_Corrente_CMD	  [ ] = "avancacorrentegrafo"   ;
-static const char Elimina_No_CMD		  [ ] = "eliminano"			    ;
-static const char Set_No_CMD			  [ ] = "setno"					;
+static const char IrInicioGrafo_CMD	  [ ] = "iriniciografo"			;
+static const char IrFinalGrafo_CMD	  [ ] = "irfinalgrafo"			;
+static const char Avanca_Corrente_CMD	  [ ] = "avancacorrentegrafo"   	;
+static const char Elimina_No_CMD	  [ ] = "eliminano"			;
+static const char Set_No_CMD		  [ ] = "setno"				;
 
 
-#define DIM_VT_GRAFO 10
-
-Grafo *vetGrafo [DIM_VT_GRAFO]; 
-
-/*ProtÛtipo das funÁıes enccapsuladas no mÛdulo*/
-int ValidarIndcVet( int indcgrafo , int Modo );
-void DestruirValor( void * pValor );
 
 
-TST_tpCondRet tst_comando_graf(char * Comandos){
-	 int indcgrafo  = -1 ,
-         numLidos   = -1 ,
-		 ret = -1;
-
-	 char nomes[100];
-	 int valorvert;
+#define Dim 10 //dimens√£o para o vetor grafo 
+#define Ok	0
 
 
-	  /*InÌcio do teste da cria grafo*/
-	if(strcmp(Comandos,CRIAR_GRAFO_CMD) == 0){
+Grafo *vetgrafo[Dim];
+
+int ValidarIndcVet( int indcgrafo , int Modo);
+
+TST_tpCondRet tst_comando_graf(char * comandos){
+
+	int indcgraf=-1,
+		nparlidos= -1,
+		funcao = -1,
+		valor;
+	char vetnome[100],
+		*ant,
+		*suc;
+	if(strcmp(comandos,CRIAR_GRAFO_CMD)==0){
+
+		nparlidos = LER_LerParametros("i", &indcgraf);
+
+		if ( ( nparlidos != 1 )
+              || ( ! ValidarIndcVet( indcgraf , 0 )))
+            {
+               return TST_CondRetParm ;
+            } //Caso o indice do vetor ou n√∫mero de par√¢metros errado
+
+		funcao=CriaGrafo(&vetgrafo[indcgraf]);
+				
+		return TST_CompararPonteiroNulo(Ok,vetgrafo[indcgraf],"Fala de mem√≥ria");
 		
-		numLidos = LER_LerParametros("i", &indcgrafo);
+	}        
+	if(strcmp(comandos,Insere_No_Grafo_CMD)==0	){
 
-		if((numLidos != 1) ||  ( ! ValidarIndcVet( indcgrafo , 1 ))){
-			return TST_CondRetParam;
+				nparlidos = LER_LerParametros("isssi", &indcgraf,&vetnome,&ant,&suc,&valor);
+
+		if ( ( nparlidos != 5 )
+              || ( ! ValidarIndcVet( indcgraf , 0 )))
+            {
+               return TST_CondRetParm ;
+            }
+		funcao=Insere_No_Grafo(vetgrafo[indcgraf],vetnome,ant,suc,valor); 
+		if(funcao == Ok){
+			return TST_CondRetOK;
 		}
-
-		ret = CriaGrafo(&vetGrafo[indcgrafo]);
-
-		return TST_CompararPonteiroNulo( 1 , vetGrafo[ indcgrafo ] ,
-               "Erro em ponteiro de nova lista."  ) ;
-	}/*Fim do teste cria*/
-
-	//InÌcio do teste Insere
-	else if(strcmp(Comandos,Insere_No_Grafo_CMD)==0){
-		numLidos = LER_Parametros("isssi",&indcgrafo,&nomes,,,);//ainda n„o sei
-
-		if((numLidos != 5) ||  ( ! ValidarIndcVet( indcgrafo , 1 ))){
-			return TST_CondRetParam;
-		}//numero de parametros errados
-		
-
-
-	}//fim do teste insere
-
-	//Inicio do teste obtem valor
-	else if(strcmp(Comandos,  ObterValor_CMD)==0){
-		numLidos = LER_Parametros("isi",&vetGrafo,&nomes,&valorvert);
-
-
-		if((numLidos != 3) ||  ( ! ValidarIndcVet( indcgrafo , 1 ))){
-			return TST_CondRetParam;
-		}
-		ret =  ObterValor(vetGrafo[indcgrafo], nomes, &valorvert);
-
-
-
-	}//fim teste obem valor
-
-	//Inicio teste Obter Valor Corrente
-	else if(strcmp(Comandos, ObterValorCorrente_CMD )==0){
-		numLidos = LER_Parametros("ii",&indcgrafo,&valorvert );
-
-		if((numLidos != 2) ||  ( ! ValidarIndcVet( indcgrafo , 1 ))){
-			return TST_CondRetParam;
-		}
-		ret =  ObterValorCorrente(vetGrafo[indcgrafo], &valorvert);
-		
-	}//Fim
-
-
-	//Inicio ir inÌcio grafo
-	else if(strcmp(Comandos, IrInicioGrafo_CMD )==0){
-		numLidos = LER_Parametros("i",&indcgrafo);
-
-		if((numLidos != 1) ||  ( ! ValidarIndcVet( indcgrafo , 1 ))){
-			return TST_CondRetParam;
-		}
-		ret = IrInicioGrafo(vetGrafo[indcgrafo]);
+		else
+			return TST_CondRetErro;
 	}
-	else if(strcmp(Comandos, IrFinalGrafo_CMD)==0){
-		numLidos = LER_Parametros("i",&indcgrafo);
+	if(strcmp(comandos,ObterValor_CMD)==0){
 
-		if((numLidos != 1) ||  ( ! ValidarIndcVet( indcgrafo , 1 ))){
-			return TST_CondRetParam;
+				nparlidos = LER_LerParametros("isi", &indcgraf,&vetnome,&valor);
+
+		if ( ( nparlidos != 1 )
+              || ( ! ValidarIndcVet( indcgraf , 0 )))
+            {
+               return TST_CondRetParm ;
+            }
+		funcao=ObterValor(vetgrafo[indcgraf],vetnome,&valor);
+		if(funcao==Ok){
+			return TST_CondRetOK;
 		}
-		ret = IrFinalGrafo(vetGrafo[indcgrafo]);
+		else {
+			return TST_CondRetErro;
+		}
 	}
-	else if(strcmp(Comandos, Avanca_Corrente_CMD)==0){
-		numLidos = LER_Parametros("ii",&indcgrafo,valorvert);
+	if(strcmp(comandos,ObterValorCorrente_CMD)==0){
 
-		if((numLidos != 2) ||  ( ! ValidarIndcVet( indcgrafo , 1 ))){
-			return TST_CondRetParam;
+				nparlidos = LER_LerParametros("ii", &indcgraf,&valor);
+
+		if ( ( nparlidos != 2 )
+              || ( ! ValidarIndcVet( indcgraf , 0 )))
+            {
+               return TST_CondRetParm ;
+            }
+		funcao = ObterValorCorrente(vetgrafo[indcgraf],&valor);
+		if(funcao==Ok){
+			return TST_CondRetOK;
 		}
-		ret = Avanca_Corrente(vetGrafo[indcgrafo], valorvert);
+		else {
+			return TST_CondRetErro;
+		}
 	}
-	else if(strcmp(Comandos, Elimina_No_CMD)==0){
-		numLidos = LER_Parametros("i",&indcgrafo);
+	if(strcmp(comandos,IrInicioGrafo_CMD)==0){
 
-		if((numLidos != 1) ||  ( ! ValidarIndcVet( indcgrafo , 1 ))){
-			return TST_CondRetParam;
+				nparlidos = LER_LerParametros("i", &indcgraf);
+
+		if ( ( nparlidos != 1 )
+              || ( ! ValidarIndcVet( indcgraf , 0 )))
+            {
+               return TST_CondRetParm ;
+            }
+		funcao = IrInicioGrafo(vetgrafo[indcgraf]) ;
+		if(funcao==Ok){
+			return TST_CondRetOK;
 		}
-		ret = EliminaNo(vetGrafo[indcgrafo]);
+		else {
+			return TST_CondRetErro;
+		}
 	}
+	if(strcmp(comandos,IrFinalGrafo_CMD)==0){
 
-	else if(strcmp(Comandos, Set_No_CMD)==0){
-		numLidos = LER_Parametros("isi",&indcgrafo,&nomes, valorvert);
+				nparlidos = LER_LerParametros("i", &indcgraf);
 
-		if((numLidos != 3) ||  ( ! ValidarIndcVet( indcgrafo , 1 ))){
-			return TST_CondRetParam;
+		if ( ( nparlidos != 1 )
+              || ( ! ValidarIndcVet( indcgraf , 0 )))
+            {
+               return TST_CondRetParm ;
+            }
+		funcao = IrFinalGrafo(vetgrafo[indcgraf]);
+		if(funcao==Ok){
+			return TST_CondRetOK;
 		}
-		ret = setValor(vetGrafo[indcgrafo], nomes ,valorvert);  
+		else {
+			return TST_CondRetErro;
+		}
+	}
+	if(strcmp(comandos,Avanca_Corrente_CMD)==0){
 
+				nparlidos = LER_LerParametros("ii", &indcgraf,&valor);
 
+		if ( ( nparlidos != 2 )
+              || ( ! ValidarIndcVet( indcgraf , 0 )))
+            {
+               return TST_CondRetParm ;
+            }
+		funcao=Avanca_Corrente(vetgrafo[indcgraf],valor);
+			if(funcao==Ok){
+			return TST_CondRetOK;
+		}
+		else {
+			return TST_CondRetErro;
+		}
+	}
+	if(strcmp(comandos,Elimina_No_CMD)==0){
+
+				nparlidos = LER_LerParametros("is", &indcgraf,&vetnome);
+
+		if ( ( nparlidos != 2 )
+              || ( ! ValidarIndcVet( indcgraf , 0 )))
+            {
+               return TST_CondRetParm ;
+            }
+		funcao=  EliminaNo(vetgrafo[indcgraf],vetnome);
+			if(funcao==Ok){
+			return TST_CondRetOK;
+		}
+		else {
+			return TST_CondRetErro;
+		}
+	}
+	if(strcmp(comandos,Set_No_CMD)==0) {
+
+				nparlidos = LER_LerParametros("i", &indcgraf);
+
+		if ( ( nparlidos != 1 )
+              || ( ! ValidarIndcVet( indcgraf , 0 )))
+            {
+               return TST_CondRetParm ;
+            }
+		funcao=setValor(vetgrafo[indcgraf], vetnome ,valor);
+		if(funcao==Ok){
+			return TST_CondRetOK;
+		}
+		else {
+			return TST_CondRetErro;
+		}
+	}
 }
-	
+
 
 
 
@@ -167,7 +222,7 @@ int ValidarIndcVet( int indcgrafo , int Modo )
    {
 
       if ( ( indcgrafo <  0 )
-        || ( indcgrafo >= DIM_VT_GRAFO ))
+        || ( indcgrafo >=  Dim))
       {
          return 1 ;
       } /* if */
@@ -177,21 +232,14 @@ int ValidarIndcVet( int indcgrafo , int Modo )
          if ( vetgrafo[ indcgrafo ] != 0 )
          {
             return 1 ;
-         } /* if */
+         } 
       } else
       {
          if ( vetgrafo[ indcgrafo ] == 0 )
          {
             return 1 ;
-         } /* if */
-      } /* if */
+         } 
+      } 
          
       return 0 ;
 }
-
- void DestruirValor( void * pValor )
-   {
-
-      free( pValor ) ;
-
-   } 
