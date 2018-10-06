@@ -1,1 +1,26 @@
-a
+Leia - Me 
+
+Apresentação:
+Este texto descreve, resumidamente, o conteúdo do arquivo .zip
+que contém toda a documentação e todos os módulos fonte do nosso trabalho.
+
+Documentação:
+Relatório-XXX.txt - Um total de 3 documentos contendo o relatório individual de cada um dos componentes do grupo, e no local de XXX nos documentos estará o nome do integrante a quem o relatório pertence.
+
+Arquivos de código fonte que compõem o trabalho:
+Grafo.c, Grafo.h - módulos de implementação e definição do trabalho, respectivamente, módulos que servem para criação de grafo
+Vertice.c, Vertice.h - módulos (implementação e definição) que servem de apoio para os módulos Grafo.
+TESTAGRAFO.c - é o módulo de implementação do módulo de teste específico do grafo.
+
+Funções Do Módulo Grafo:
+
+
+Funções Do Módulo Vértiece:
+
+
+Arquivos de diretivas de teste:
+testagrafo.script - serve para o teste automamatizado do módulo Grafo
+
+/*Utilitários e ferramentas:
+- O arquivo batch que coordenam a execução do teste.*/
+
