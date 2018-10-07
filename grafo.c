@@ -87,30 +87,41 @@ typedef struct Vertice Vertice;
 	 /* Retorna aos nós ja inseridos e atualiza suas listas de antessesor e sucessor */
     void Completa_Arestas ( Grafo* grafo ,vertice* no, LIS_tppLista Ant ,LIS_tppLista Suc)
     {
+	  int i=0;
       LIS_tpCondRet x=LIS_CondRetOK;
-      void* p;
+      char* p;
 	  vertice* v;
       IrInicioLista( Ant ) ;
-      while(x!=2)
+      while(x!=LIS_CondRetListaVazia && x!=LIS_CondRetFimLista)
       {
-        p=LIS_ObterValor(Ant);
-        x=LIS_ProcurarValor(grafo->ponteirosHead , p) ;
-        //atualizar as listas aki
-		v=(vertice*)LIS_ObterValor(grafo->ponteirosHead);
-		x=LIS_InserirElementoApos( getLIS_SUC(v), no);
-        x=LIS_AvancarElementoCorrente( Ant , 1 ) ;
-
+        p=(char*)LIS_ObterValor(Ant);
+		if(p!=NULL)
+		{
+			i=Procura_No(grafo , p) ;
+			if(i==1)
+			{
+				v=(vertice*)LIS_ObterValor(grafo->ponteirosHead);
+				x=LIS_InserirElementoApos( getLIS_SUC(v), getNome(no));
+			}
+		}
+		x=LIS_AvancarElementoCorrente( Ant , 1 ) ;
       }
+	  x=LIS_CondRetOK;
       IrInicioLista( Suc ) ;
-      while(x!=2)
+      while(x!=LIS_CondRetListaVazia  &&  x!=LIS_CondRetFimLista)
       {
-        p=LIS_ObterValor(Suc);
-        x=LIS_ProcurarValor(grafo->ponteirosHead , p) ;
-        //atualizar as listas aki
-		v =(vertice*) LIS_ObterValor(grafo->ponteirosHead);
-		x = LIS_InserirElementoApos(getLIS_Ant(v), no);
-        x=LIS_AvancarElementoCorrente( Suc , 1 ) ;
-
+        p=(char*)LIS_ObterValor(Suc);
+		if(p!=NULL)
+		{	
+			i=Procura_No(grafo , p) ;
+			if(i==1)
+			{
+				v =(vertice*) LIS_ObterValor(grafo->ponteirosHead);
+				x = LIS_InserirElementoApos(getLIS_Ant(v), no);
+			
+			}
+		}
+		x=LIS_AvancarElementoCorrente( Suc , 1 ) ;
       }
 
 	  return;
@@ -120,32 +131,39 @@ typedef struct Vertice Vertice;
 /*A função recebe o grafo no qual vai inserir , o nome do Vertice a ser inserido
 e as listas de vertices succesores e antecessores.Cria o vertice dinamicamente e insere ele no grafo , depois disso
 cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
-    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char* nome, char* ant,char* suc, int Valor)
+    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], int Valor,char ant[][150],int a,char suc[][150],int s )
     {
-	  int i;
+	  int i,g;
+	  //int j,k;
 	   Vertice* novo;
+	   Vertice* v;
 	  LIS_tpCondRet retVertice;
       LIS_tppLista ListaSuc=LIS_CriarLista(NULL);
       LIS_tppLista ListaAnt=LIS_CriarLista(NULL);
-	  for(i=0;i<3;i++)
+	  novo = Cria_Vertice( nome,  Valor, ListaAnt , ListaSuc);
+	  retVertice=LIS_InserirElementoApos(pGrafo->ponteirosHead , novo);
+      if(retVertice!=LIS_CondRetOK)
+      {
+        return Grafo_CondRetDeuMerda;
+      }
+	  for(i=0;i<a;i++)
 	  {
-		LIS_InserirElementoApos( ListaAnt, &ant[i]);
-	    
+		g=Procura_No(pGrafo, ant[i]);
+		
+		if(g==1)
+		{
+			v=(vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
+			LIS_InserirElementoApos( ListaAnt, v );
+		}
 	  }
 
-	  for(i=0;i<2;i++)
+	  for(i=0;i<s;i++)
 	  {
-		LIS_InserirElementoApos( ListaAnt, &suc[i]);
+		LIS_InserirElementoApos( ListaSuc, &suc[i]);
 	  
 	  }
       
-	  novo = Cria_Vertice( nome,  Valor, ListaAnt , ListaSuc);
-	  
-      retVertice=LIS_InserirElementoApos(pGrafo->ponteirosHead , novo);
-      if(retVertice!=LIS_CondRetOK)
-      {
-        return Grafo_CondRetDeuMerda;/*isso é TEMPORARIO*/
-      }
+	 
       Completa_Arestas(pGrafo,novo,ListaAnt,ListaSuc);
 	  return Grafo_CondRetOK;
     }
