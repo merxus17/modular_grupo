@@ -32,30 +32,20 @@ vertice* Cria_Vertice(char *nome, void* Valor, LIS_tppLista ListaAnt,  LIS_tppLi
 
 }
 
-void Destroi_Vertice(void* v)
+void Destroi_Vertice(vertice* v)
 {
 	if(v!=NULL)
 	{
-			vertice* x=(vertice*)v;
-			if(x->Lista_Antecessores!=NULL)
+			
+			if(v->Lista_Antecessores!=NULL)
 			{
-				LIS_DestruirLista(x->Lista_Antecessores);
+				LIS_DestruirLista(v->Lista_Antecessores);
 			}
-			if(x->Lista_Sucessores!=NULL)
-				LIS_DestruirLista(x->Lista_Sucessores);
-<<<<<<< HEAD
-			if(x->Nome!=NULL)
-			{
-				printf("%s",x->Nome);
-				free(x->Nome);
-			}
-=======
-			if(x->Nome)
-			free(x->Nome);
+			if(v->Lista_Sucessores!=NULL)
+			LIS_DestruirLista(v->Lista_Sucessores);
 
->>>>>>> ef3147700c19dddd26da11ba7dfb6e270c958a4b
-			if(v!=NULL)
-			printf("ok não funcionou");
+			
+			
 			free(v);
 	}
 }
@@ -94,28 +84,40 @@ LIS_tppLista getLIS_Ant(vertice*v)
 void PrintVertice(vertice* v)
 {
 	char* x;
-	vertice* z;
-	//LIS_tpCondRet z=LIS_CondRetOK;
-	printf("No: %s %d \n \n",v->Nome,v->Valor) ;
+	vertice* z=NULL;
+	int *i=(int*)(v->Valor);
+	printf("No: %s %d \n \n",v->Nome,*i) ;
+	printf("lista de antecessores \n");
 	IrInicioLista(v->Lista_Antecessores);
+	
 	z=(vertice*)LIS_ObterValor(v->Lista_Antecessores);
-	printf("lista de antecessores \n %s\n",z->Nome);
-	/*x=(char*)LIS_ObterValor(v->Lista_Antecessores);
-	printf("lista de antecessores\n %s\n",x);*/
+
+	if(z!=NULL )
+	{
+		printf(" %s\n",z->Nome);
+	}
 		while (LIS_CondRetFimLista !=LIS_AvancarElementoCorrente( v->Lista_Antecessores,1))
 		{
 			z=(vertice*)LIS_ObterValor(v->Lista_Antecessores);
+			if(z!=NULL)
+			{
 			printf(" %s\n",z->Nome);
-			/*x=(char*)LIS_ObterValor(v->Lista_Antecessores);
-			printf(" %s\n",x);*/
+			}
 		}
-	//z=LIS_CondRetOK;
+	printf("lista de sucessores\n");
 	IrInicioLista(v->Lista_Sucessores);
-	x=(char*)LIS_ObterValor(v->Lista_Sucessores);
-	printf("lista de sucessores\n %s\n",x);
+	z=(vertice*)LIS_ObterValor(v->Lista_Sucessores);
+	if(z!=NULL)
+	{
+		printf(" %s\n",z->Nome);
+	}
  		while (LIS_CondRetFimLista !=LIS_AvancarElementoCorrente( v->Lista_Sucessores,1))
 		{
-			x=(char*)LIS_ObterValor(v->Lista_Sucessores);
-			printf(" %s\n",x);
+			z=(vertice*)LIS_ObterValor(v->Lista_Sucessores);
+			if(z!=NULL)
+			{
+			printf(" %s\n",z->Nome);
+		
+			}
 		}
 }

@@ -23,9 +23,9 @@
 	 //printf("%p\n",&ppGrafo);
 	 x=CriaGrafo(&ppGrafo);
 	 //printf("cria grafo: %d %p %p\n",x,&ppGrafo,ppGrafo);
-	 x= Insere_No_Grafo(ppGrafo, nome1,Valor1,  antA,1, sucA ,2);
-	 x= Insere_No_Grafo(ppGrafo, nome2,Valor2,  antB, 2,sucB,1 );
-     x= Insere_No_Grafo(ppGrafo, nome3,Valor3,  antC,2, sucC,2);
+	 x= Insere_No_Grafo(ppGrafo, nome1,&Valor1,  antA,1, sucA ,2);
+	 x= Insere_No_Grafo(ppGrafo, nome2,&Valor2,  antB, 2,sucB,1 );
+     x= Insere_No_Grafo(ppGrafo, nome3,&Valor3,  antC,2, sucC,2);
 	 //printf("insere:%d\n",x);
 	 //x=ObterValorCorrente(ppGrafo, &valor); 
 	 //x=setValor(ppGrafo,  nome3 , 17);
@@ -33,7 +33,7 @@
 	 //x=ObterValor(ppGrafo, nome2,&valor2);
 	 //x = ObterValor(ppGrafo, nome1, &valor1);
 	 
-	 //printf(" valor: %d  %d\n",valor1,valor2);
+	 PrintGrafo(ppGrafo);
 	 x= EliminaNo(ppGrafo,nome3);
 	 PrintGrafo(ppGrafo);
 	 
