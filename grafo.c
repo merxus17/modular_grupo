@@ -65,6 +65,7 @@ typedef struct Vertice Vertice;
 
 
   void Excluir_Valor ( void* pValor);
+  Procura_No(Grafo* pGrafo, char* nome);
 
 /*Cria o grafo alocando a lista de ponteiros para os vertices e a propria lista de vertices e o no corrente como null */
      grafo_tpCondRet CriaGrafo(Grafo** ppGrafo)
@@ -106,8 +107,7 @@ typedef struct Vertice Vertice;
 	  int i=0;
       LIS_tpCondRet x=LIS_CondRetOK;
 	  vertice* vsuc;
-      char* p;
-	  vertice*z;
+      vertice*z;
 	  vertice* v;
       IrInicioLista( Ant ) ;
       while(x!=LIS_CondRetListaVazia && x!=LIS_CondRetFimLista)
@@ -154,7 +154,7 @@ typedef struct Vertice Vertice;
 /*A função recebe o grafo no qual vai inserir , o nome do Vertice a ser inserido
 e as listas de vertices succesores e antecessores.Cria o vertice dinamicamente e insere ele no grafo , depois disso
 cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
-    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], void* Valor,char ant[][150],int a,char suc[][150],int s )
+    grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], void* Valor,char ant[][150],int num_ant,char suc[][150],int num_suc )
     {
 	  int i,g;
 	  //int j,k;
@@ -170,7 +170,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
       {
         return Grafo_CondRetDeuMerda;
       }
-	  for(i=0;i<a;i++)
+	  for(i=0;i<num_ant;i++)
 	  {
 		g=Procura_No(pGrafo, ant[i]);
 		
@@ -181,10 +181,10 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		}
 	  }
 
-	  for(i=0;i<s;i++)
+	  for(i=0;i<num_suc;i++)
 	  {
-		v=Cria_Vertice(suc[i],NULL,NULL,NULL);
-		LIS_InserirElementoApos( ListaSuc, v);
+		vsuc=Cria_Vertice(suc[i],NULL,NULL,NULL);
+		LIS_InserirElementoApos( ListaSuc, vsuc);
 	  
 	  }
       
@@ -214,22 +214,26 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	/*Trecho em Obra  ,Desculpe o transtorno   */
 	int  Procura_No(Grafo* pGrafo, char* nome)
 	{
-
 		LIS_tpCondRet x;
-		
+		vertice*v = (vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
+		if (v ==NULL) 
+		{
+			return -1;
+		}
+
 		IrInicioLista(pGrafo->ponteirosHead );
 		while (strcmp(getNome((vertice*)LIS_ObterValor(pGrafo->ponteirosHead)) ,nome)!=0)
 		{ 
 			x=LIS_AvancarElementoCorrente(pGrafo->ponteirosHead, 1);
 			if(x==LIS_CondRetFimLista)
 			{
-				
 				return 0;
 			}
-			if (x ==LIS_CondRetListaVazia)
+			if (x == LIS_CondRetListaVazia)
 			{
-				return -1;
+				return - 1;
 			}
+			
 		}	
 
 	return 1;
@@ -332,6 +336,8 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	/* A Função chama a função de eliminar o elemento da lista, tanto na lista de antecessores quanto na de sucessores e depois remove o elemento em sí*/
 	grafo_tpCondRet EliminaNo(Grafo  *pGrafo,char* nome )
 	{
+		
+		LIS_tpCondRet x=LIS_CondRetOK;
 		vertice* v;
 		vertice* a;
 		LIS_tppLista Ant=LIS_CriarLista(Excluir_Valor);
@@ -351,36 +357,40 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 		}
 		Suc=getLIS_SUC(v);
 		Ant=getLIS_Ant(v) ;
+		IrInicioLista(Ant);
 		a=(vertice*)LIS_ObterValor(Ant);
-		a=(vertice*)LIS_ObterValor(Ant);
-		a=(vertice*)LIS_ObterValor(Ant);
-		AuxAnt=getLIS_Ant(a) ;
-		AuxSuc=getLIS_SUC(a);
-		while(LIS_AvancarElementoCorrente(Ant,1)!=LIS_CondRetFimLista) 
+		if (a!=NULL)
 		{
-			LIS_AvancarElementoCorrente(Ant,-1);
-			a=(vertice*)LIS_ObterValor(Ant);
-			AuxSuc=getLIS_SUC(a);
-			while(LIS_ObterValor(AuxSuc)!=v)
+			while (x != LIS_CondRetListaVazia && x != LIS_CondRetFimLista)
 			{
-				LIS_AvancarElementoCorrente(AuxSuc,1);
+				a = (vertice*)LIS_ObterValor(Ant);
+				AuxSuc = getLIS_SUC(a);
+
+				if (Compara_Ant(AuxSuc, getNome(v)))
+				{
+					LIS_ExcluirElemento(AuxSuc);
+				}
+				x = LIS_AvancarElementoCorrente(Ant, 1);
 			}
-			LIS_ExcluirElemento(AuxSuc) ;
-			LIS_AvancarElementoCorrente(Ant,1);
 		}
-		while(LIS_AvancarElementoCorrente(Suc,1)!=LIS_CondRetFimLista) 
+		x = LIS_CondRetOK;
+		IrInicioLista(Suc);
+		a = (vertice*)LIS_ObterValor(Suc);
+		if (a != NULL)
 		{
-			LIS_AvancarElementoCorrente(Suc,-1);
-			a=(vertice*)LIS_ObterValor(Suc);
-			AuxAnt=getLIS_Ant(a);
-			while(LIS_ObterValor(AuxAnt)!=v)
+			while (x != LIS_CondRetListaVazia && x != LIS_CondRetFimLista)
 			{
-				LIS_AvancarElementoCorrente(AuxAnt,1);
+				a = (vertice*)LIS_ObterValor(Suc);
+				i=Procura_No(pGrafo, getNome(a));
+				a= (vertice*)LIS_ObterValor(pGrafo->ponteirosHead);
+				AuxAnt = getLIS_Ant(a);
+				if (Compara_Ant(AuxAnt, getNome(v)))
+				{
+					LIS_ExcluirElemento(AuxAnt);
+				}
+				x=LIS_AvancarElementoCorrente(Suc, 1);
 			}
-			LIS_ExcluirElemento(AuxAnt) ;
-			LIS_AvancarElementoCorrente(Suc,1);
 		}
-			
 		i=Procura_No(pGrafo, nome);
 		LIS_ExcluirElemento(pGrafo->ponteirosHead);
 			
@@ -392,6 +402,7 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	{
 
 		free(pValor);
+		pValor = NULL;
 		
 	}
 

@@ -34,8 +34,9 @@
 	 //x = ObterValor(ppGrafo, nome1, &valor1);
 	 
 	 PrintGrafo(ppGrafo);
-	 x= EliminaNo(ppGrafo,nome3);
-	 PrintGrafo(ppGrafo);
+	 x=EliminaNo(ppGrafo,nome3);
+	 printf("*******************************************\n");
+	PrintGrafo(ppGrafo);
 	 
 	 //printf(" condição %d\n", x);
 	 x = ObterValor(ppGrafo, nome4, &valor3);

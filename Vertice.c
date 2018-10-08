@@ -40,11 +40,14 @@ void Destroi_Vertice(vertice* v)
 			if(v->Lista_Antecessores!=NULL)
 			{
 				LIS_DestruirLista(v->Lista_Antecessores);
+				v->Lista_Antecessores = NULL;
 			}
-			if(v->Lista_Sucessores!=NULL)
-			LIS_DestruirLista(v->Lista_Sucessores);
-
-			
+			if (v->Lista_Sucessores != NULL)
+			{
+				LIS_DestruirLista(v->Lista_Sucessores);
+				v->Lista_Sucessores = NULL;
+			}
+			v->Nome=NULL;
 			
 			free(v);
 	}
@@ -63,22 +66,39 @@ VER_tpCondRet setValorVertice(vertice*v,void* Valor)
 
 char* getNome(vertice* v)
 {
-	return v->Nome;
+	if (v != NULL)
+	{
+		return v->Nome;
+	}
+	return NULL;
 }
 
 void* getValor(vertice* v)
 {
-	return v->Valor;
+	if (v != NULL)
+	{
+		return v->Valor;
+	}
+	return NULL;
 }
 
 LIS_tppLista getLIS_SUC(vertice*v)
 {
-	return v->Lista_Sucessores;
+	if (v != NULL)
+	{
+		return v->Lista_Sucessores;
+	}
+	return NULL;
 }
 
 LIS_tppLista getLIS_Ant(vertice*v)
 {
-	return v->Lista_Antecessores;
+	if (v != NULL)
+	{
+		return v->Lista_Antecessores;
+
+	}
+	return NULL;
 }
 
 void PrintVertice(vertice* v)
@@ -92,7 +112,7 @@ void PrintVertice(vertice* v)
 	
 	z=(vertice*)LIS_ObterValor(v->Lista_Antecessores);
 
-	if(z!=NULL )
+	if(z->Nome!=NULL)
 	{
 		printf(" %s\n",z->Nome);
 	}
@@ -107,7 +127,7 @@ void PrintVertice(vertice* v)
 	printf("lista de sucessores\n");
 	IrInicioLista(v->Lista_Sucessores);
 	z=(vertice*)LIS_ObterValor(v->Lista_Sucessores);
-	if(z!=NULL)
+	if(z->Nome!=NULL)
 	{
 		printf(" %s\n",z->Nome);
 	}

@@ -90,7 +90,7 @@ typedef enum {
 *	Grafo_CondRetDeuMerda
 *	Grafo_CondRetOk
 ***********************************************************************/
-   grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo,char nome[150], void* Valor,char ant[][150],int a,char suc[][150],int s );
+   grafo_tpCondRet Insere_No_Grafo(Grafo* pGrafo, char nome[150], void* Valor, char ant[][150], int num_ant, char suc[][150], int num_suc);
 /***********************************************************************
 * $FC Função:
 *	Obter Valor
@@ -105,7 +105,7 @@ typedef enum {
 *	Grafo_ContRetGrafoVazio
 *	Grafo_CondRetOk
 *************************************************************************/
-	grafo_tpCondRet ObterValor(Grafo  *pGrafo, char *nome, int *Valor);
+   grafo_tpCondRet ObterValor(Grafo* pGrafo, char* nome, void* Valor);
 
 /*************************************************************************
 * $FC Função:
@@ -119,7 +119,7 @@ typedef enum {
 *	Grafo_CondRetGrafoVazio
 *	Grafo_CondRetOk
 **************************************************************************/
-	grafo_tpCondRet ObterValorCorrente(Grafo *pGrafo, int *Valor);
+	grafo_tpCondRet ObterValorCorrente(Grafo* pGrafo, void* Valor);
 
 /*************************************************************************
 * $FC Função:
