@@ -65,7 +65,7 @@ VER_tpCondRet setValorVertice(vertice*v,int Valor);
 *     LIS_CondRetOK    - destruiu sem problemas
 *
 ***********************************************************************/
-void Destroi_Vertice(vertice *v);
+void Destroi_Vertice(void *v);
 
 /***********************************************************************
 *

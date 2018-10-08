@@ -32,9 +32,12 @@ vertice* Cria_Vertice(char *nome, int Valor, LIS_tppLista ListaAnt,  LIS_tppList
 
 }
 
-void Destroi_Vertice(vertice* v)
+void Destroi_Vertice(void* v)
 {
-	free(v);
+	vertice* x=(vertice*)v;
+	free(x->Lista_Antecessores);
+	free(x->Lista_Sucessores);
+	free(x);
 }
 
 VER_tpCondRet setValorVertice(vertice*v,int Valor)

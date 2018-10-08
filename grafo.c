@@ -76,13 +76,28 @@ typedef struct Vertice Vertice;
         return Grafo_CondRetFaltouMemoria;
       }
 	 
-      pGrafo->ponteirosHead=LIS_CriarLista(NULL);
+      pGrafo->ponteirosHead=LIS_CriarLista(Destroi_Vertice);
       *ppGrafo=pGrafo;
 	
       return Grafo_CondRetOK;
     }
 	 
-
+	 int Compara_Ant(LIS_tppLista lista, char* nome)
+	 {
+		 char* nomeLista;
+		 LIS_tpCondRet x=LIS_CondRetOK;
+		 IrInicioLista(lista);
+		 while(x!=LIS_CondRetListaVazia && x!=LIS_CondRetFimLista)
+		{
+			nomeLista=(char*)LIS_ObterValor(lista);
+			if(strcmp(nomeLista,nome)==0)
+			{
+				return 0;
+			}
+			x=LIS_AvancarElementoCorrente( lista , 1 ) ;
+		 }
+	 return 1 ;
+	 }
 
 	 /* Retorna aos nós ja inseridos e atualiza suas listas de antessesor e sucessor */
     void Completa_Arestas ( Grafo* grafo ,vertice* no, LIS_tppLista Ant ,LIS_tppLista Suc)
@@ -90,18 +105,23 @@ typedef struct Vertice Vertice;
 	  int i=0;
       LIS_tpCondRet x=LIS_CondRetOK;
       char* p;
+	  vertice*z;
 	  vertice* v;
       IrInicioLista( Ant ) ;
       while(x!=LIS_CondRetListaVazia && x!=LIS_CondRetFimLista)
       {
-        p=(char*)LIS_ObterValor(Ant);
-		if(p!=NULL)
+        z=(vertice*)LIS_ObterValor(Ant);
+		if(z!=NULL)
 		{
-			i=Procura_No(grafo , p) ;
+			i=Procura_No(grafo , getNome(z)) ;
 			if(i==1)
 			{
 				v=(vertice*)LIS_ObterValor(grafo->ponteirosHead);
+				if(Compara_Ant(getLIS_SUC(v),getNome(no)))
+				{
 				x=LIS_InserirElementoApos( getLIS_SUC(v), getNome(no));
+			
+				}
 			}
 		}
 		x=LIS_AvancarElementoCorrente( Ant , 1 ) ;
@@ -138,8 +158,8 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	   Vertice* novo;
 	   Vertice* v;
 	  LIS_tpCondRet retVertice;
-      LIS_tppLista ListaSuc=LIS_CriarLista(NULL);
-      LIS_tppLista ListaAnt=LIS_CriarLista(NULL);
+      LIS_tppLista ListaSuc=LIS_CriarLista(Destroi_Vertice);
+      LIS_tppLista ListaAnt=LIS_CriarLista(Destroi_Vertice);
 	  novo = Cria_Vertice( nome,  Valor, ListaAnt , ListaSuc);
 	  retVertice=LIS_InserirElementoApos(pGrafo->ponteirosHead , novo);
       if(retVertice!=LIS_CondRetOK)
@@ -309,10 +329,10 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 	{
 		vertice* v;
 		vertice* a;
-		LIS_tppLista Ant=LIS_CriarLista(NULL);
-		LIS_tppLista Suc=LIS_CriarLista(NULL);
-		LIS_tppLista AuxAnt=LIS_CriarLista(NULL);
-		LIS_tppLista AuxSuc=LIS_CriarLista(NULL);
+		LIS_tppLista Ant=LIS_CriarLista(Destroi_Vertice);
+		LIS_tppLista Suc=LIS_CriarLista(Destroi_Vertice);
+		LIS_tppLista AuxAnt=LIS_CriarLista(Destroi_Vertice);
+		LIS_tppLista AuxSuc=LIS_CriarLista(Destroi_Vertice);
 		int i=Procura_No(pGrafo, nome);
 		if (i == 0)
 		{
