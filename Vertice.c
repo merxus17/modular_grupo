@@ -45,7 +45,7 @@ void Destroi_Vertice(void* v)
 				free(x->Lista_Sucessores);
 			if(x->Nome)
 			free(x->Nome);
-	
+			
 			free(v);
 	}
 }
