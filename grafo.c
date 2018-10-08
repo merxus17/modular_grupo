@@ -375,9 +375,9 @@ cria e preenche as listas tanto dele quanto daqueles q ele afeta*/
 			LIS_ExcluirElemento(AuxAnt) ;
 			LIS_AvancarElementoCorrente(Suc,1);
 		}
-		LIS_ExcluirElemento(getLIS_SUC(v)) ;
-		LIS_ExcluirElemento(getLIS_Ant(v)) ;
-		Destroi_Vertice(v);
+		i=Procura_No(pGrafo, nome);
+		LIS_ExcluirElemento(pGrafo->ponteirosHead);
+		
 		return Grafo_CondRetOK;
 	}
 

@@ -43,8 +43,11 @@ void Destroi_Vertice(void* v)
 			}
 			if(x->Lista_Sucessores!=NULL)
 				LIS_DestruirLista(x->Lista_Sucessores);
-			if(x->Nome)
-			free(x->Nome);
+			if(x->Nome!=NULL)
+			{
+				printf("%s",x->Nome);
+				free(x->Nome);
+			}
 			if(v!=NULL)
 			printf("ok não funcionou");
 			free(v);
