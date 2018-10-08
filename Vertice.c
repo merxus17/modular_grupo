@@ -14,14 +14,14 @@
 ****************************************************/
 typedef struct Vertice
 {
-	int Valor;
+	void* Valor;
 	LIS_tppLista Lista_Antecessores;
 	LIS_tppLista Lista_Sucessores;
 	char *Nome;
 }vertice;
 
 
-vertice* Cria_Vertice(char *nome, int Valor, LIS_tppLista ListaAnt,  LIS_tppLista ListaSuc)
+vertice* Cria_Vertice(char *nome, void* Valor, LIS_tppLista ListaAnt,  LIS_tppLista ListaSuc)
 {
 	vertice* novo = (vertice*)malloc(sizeof(vertice));
 	novo->Nome = nome;
@@ -34,13 +34,23 @@ vertice* Cria_Vertice(char *nome, int Valor, LIS_tppLista ListaAnt,  LIS_tppList
 
 void Destroi_Vertice(void* v)
 {
-	vertice* x=(vertice*)v;
-	free(x->Lista_Antecessores);
-	free(x->Lista_Sucessores);
-	free(x);
+	if(v!=NULL)
+	{
+			vertice* x=(vertice*)v;
+			if(x->Lista_Antecessores!=NULL)
+			{
+				free(x->Lista_Antecessores);
+			}
+			if(x->Lista_Sucessores!=NULL)
+				free(x->Lista_Sucessores);
+			if(x->Nome)
+			free(x->Nome);
+	
+			free(v);
+	}
 }
 
-VER_tpCondRet setValorVertice(vertice*v,int Valor)
+VER_tpCondRet setValorVertice(vertice*v,void* Valor)
 {
 	if(v!=NULL)
 	{
@@ -56,7 +66,7 @@ char* getNome(vertice* v)
 	return v->Nome;
 }
 
-int getValor(vertice* v)
+void* getValor(vertice* v)
 {
 	return v->Valor;
 }

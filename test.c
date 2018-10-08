@@ -34,7 +34,7 @@
 	 //x = ObterValor(ppGrafo, nome1, &valor1);
 	 
 	 //printf(" valor: %d  %d\n",valor1,valor2);
-	 x= EliminaNo(ppGrafo,nome3);
+	 //x= EliminaNo(ppGrafo,nome3);
 	 PrintGrafo(ppGrafo);
 	 
 	 //printf(" condição %d\n", x);

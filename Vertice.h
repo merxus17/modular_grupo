@@ -94,11 +94,11 @@ char* getNome(vertice* v);
 *		v - Vertice contendo o valor
 *
 *  $FV Valor retornado
-*	int com o Valor do vertice
+*	void* com o Valor do vertice
 *
 ***********************************************************************/
 
-int getValor(vertice* v);
+void* getValor(vertice* v);
 
 
 LIS_tppLista getLIS_SUC(vertice*v);
