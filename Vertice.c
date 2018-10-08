@@ -39,13 +39,15 @@ void Destroi_Vertice(void* v)
 			vertice* x=(vertice*)v;
 			if(x->Lista_Antecessores!=NULL)
 			{
-				free(x->Lista_Antecessores);
+				LIS_DestruirLista(x->Lista_Antecessores);
 			}
 			if(x->Lista_Sucessores!=NULL)
-				free(x->Lista_Sucessores);
+				LIS_DestruirLista(x->Lista_Sucessores);
 			if(x->Nome)
 			free(x->Nome);
-			
+
+			if(v!=NULL)
+			printf("ok não funcionou");
 			free(v);
 	}
 }
