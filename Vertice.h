@@ -33,7 +33,7 @@ typedef struct Vertice vertice;
 *	Retorna um ponteiro do tipo estruturado vertice
 *
 ***********************************************************************/
-vertice* Cria_Vertice(char *nome, int Valor, LIS_tppLista ListaAnt,  LIS_tppLista ListaSuc);
+vertice* Cria_Vertice(char *nome, void* Valor, LIS_tppLista ListaAnt,  LIS_tppLista ListaSuc );
 
 /***********************************************************************
 *

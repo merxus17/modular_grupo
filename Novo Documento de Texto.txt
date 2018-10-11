@@ -20,7 +20,3 @@ Funções Do Módulo Vértiece:
 
 Arquivos de diretivas de teste:
 testagrafo.script - serve para o teste automamatizado do módulo Grafo
-
-/*Utilitários e ferramentas:
-- O arquivo batch que coordenam a execução do teste.*/
-

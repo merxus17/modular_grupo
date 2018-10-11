@@ -299,7 +299,8 @@
             pElem->pProx->pAnt = pElem->pAnt ;
          } else
          {
-            pLista->pFimLista = pElem->pAnt ;
+			pLista->pElemCorr = pElem->pAnt;
+            pLista->pFimLista = pLista->pElemCorr;
          } /* if */
 
       LiberarElemento( pLista , pElem ) ;
