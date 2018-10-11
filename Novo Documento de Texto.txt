@@ -14,9 +14,15 @@ TESTAGRAFO.c - é o módulo de implementação do módulo de teste específico d
 
 Funções Do Módulo Grafo:
 
+CRIAR_GRAFO - Cuja função é alocar na memória a estrutura grafo
+Insere_No_Grafo - Serve para inserir informações no grafo
+ObterValor - Com ela se localiza o valor de um vértice
+ObterValorCorrente - Ela serve para identificar o valor em que o cursor se encotra 
+IrInicioGrafo - Vai para o primeiro vértice inserido
+IrFinalGrafo - Vai para o último inserido
+Avanca_Corrente - Faz o cursor ir para o seguinte 
+Elimina_No - Deleta o nó
 
-Funções Do Módulo Vértiece:
 
-
-Arquivos de diretivas de teste:
-testagrafo.script - serve para o teste automamatizado do módulo Grafo
+Arquivo de diretivas de teste:
+testagrafo.script - (deveria)serve para o teste automamatizado do módulo Grafo
